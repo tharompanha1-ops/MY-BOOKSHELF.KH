@@ -1,0 +1,1438 @@
+<!doctype html>
+<html lang="km">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#1349b7" />
+<title>ក្រាហ្វិកគណនា - MY BOOKSHELF</title>
+<link rel="icon" type="image/png" href="/image/LOGO_OF_MY_BOOKSHELF_UNBACKGROUND.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Kantumruy+Pro:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.1/math.min.js"></script>
+
+<style>
+:root {
+  --primary: #16a34a; --primary-hover: #15803d; --primary-light: #dcfce7;
+  --accent: #eab308; --accent-hover: #ca8a04; --dark-bg: #0f172a; --card-bg: #ffffff;
+  --text-main: #3d4c64; --text-muted: #64748b; --border-color: #83d37f;
+  --radius-lg: 16px; --radius-md: 10px; --radius-full: 9999px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05); --shadow-md: 0 4px 20px -2px rgba(0,0,0,0.08);
+  --shadow-lg: 0 12px 30px -4px rgba(0,0,0,0.12);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --panel-tint: #e5f7fc;
+  --font-family-base: "Kantumruy Pro", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  font-family: "Kantumruy Pro", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #f1fff0; color: var(--text-main); line-height: 1.5;
+  display: flex; flex-direction: column; overflow-x: hidden; height: auto; min-height: 100%;
+}
+header {
+  flex-shrink: 0; top: 0; left: 0; width: 100%; z-index: 1000;
+  background: linear-gradient(135deg, #1349b7 0%, #2095b6 100%);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding: 14px 48px; display: flex; align-items: center; justify-content: space-between;
+  transition: var(--transition); height: 70px; border-radius: 2px;
+}
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-text { font-family: "Inter", var(--font-family-base); font-size: 22px; font-weight: 800; letter-spacing: 0.5px; line-height: 0.9; }
+.logo-text .live { color: #d16550; }
+.logo-text .teaching { color: #15be1b; }
+.logo-khmer { font-size: 11px; color: #94a3b8; font-weight: 400; letter-spacing: 0.5px; }
+.head-right { display: flex; align-items: center; gap: 10px; }
+.mode-toggle { display: none; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-md); padding: 3px; gap: 3px; }
+.mode-toggle button { border: none; background: transparent; color: #cbd5e1; width: 36px; height: 32px; border-radius: 7px; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+.mode-toggle button.active { background: var(--primary); color: #fff; }
+.app-body { flex: none; height: calc(100vh - 70px); display: flex; min-height: 0; padding: 14px; gap: 14px; position: relative; }
+.side-panel { width: 400px; flex-shrink: 0; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
+.side-head { padding: 12px 16px 10px; border-bottom: 1px solid #eef2f0; display: flex; align-items: center; justify-content: space-between; }
+.side-head h3 { font-size: 13px; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 7px; }
+.side-head h3 i { color: var(--primary); }
+.count-badge { font-family: "JetBrains Mono", monospace; font-size: 10px; background: var(--primary-light); color: var(--primary-hover); border-radius: var(--radius-full); padding: 2px 8px; font-weight: 600; }
+.expr-list { flex: 0 1 auto; max-height: 38%; overflow-y: auto; padding: 10px; background: var(--panel-tint); }
+.expr-row { display: flex; align-items: center; gap: 8px; background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 7px 9px; margin-bottom: 7px; transition: var(--transition); }
+.expr-row.focused { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(22,163,74,0.14); }
+.expr-chip { width: 30px; height: 30px; border-radius: 99px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; color: #ffffff; flex-shrink: 0; cursor: pointer; }
+.expr-chip sub { font-size: 9px; }
+.expr-input { flex: 1; min-width: 0; border: none; background: transparent; font-family: "JetBrains Mono", monospace; font-size: 14px; color: var(--text-main); outline: none; }
+.expr-input::placeholder { color: #a3b0c2; font-family: "Kantumruy Pro", sans-serif; }
+.expr-del { border: none; background: none; color: var(--text-muted); cursor: pointer; font-size: 12px; width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; }
+.expr-del:hover { background: #fee2e2; color: #dc2626; }
+.add-expr-btn { width: calc(100% - 20px); margin: 0 10px 10px; padding: 9px; border-radius: var(--radius-full); border: 1px dashed var(--primary); background: var(--primary-light); color: var(--primary-hover); font-family: "Kantumruy Pro", sans-serif; font-size: 12.5px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: var(--transition); }
+.add-expr-btn:hover { background: #bcf3cf; }
+.keypad-block { flex: 1; display: flex; flex-direction: column; min-height: 0; border-top: 1px solid #eef2f0; padding: 10px; }
+.filter-container { display: flex; gap: 6px; margin-bottom: 8px; flex-shrink: 0; }
+.cat-btn { flex: 1; background: var(--card-bg); border: 1px solid var(--border-color); padding: 7px 4px; border-radius: var(--radius-full); color: var(--text-main); font-size: 10.5px; font-weight: 600; font-family: inherit; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 4px; }
+.cat-btn:hover, .cat-btn.active { background: var(--primary); color: #ffffff; border-color: var(--primary); }
+.cat-pane { display: none; }
+.cat-pane.active { display: grid; }
+.cat-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 8px; }
+.cat-key { background: var(--panel-tint); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 7px 4px; font-family: "JetBrains Mono", monospace; font-size: 12.5px; color: var(--text-main); cursor: pointer; transition: var(--transition); }
+.cat-key:hover { background: var(--primary-light); }
+.keypad-grid { flex: 1; display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(4, 1fr); gap: 6px; min-height: 0; }
+.key { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: var(--text-main); font-family: "JetBrains Mono", "Kantumruy Pro", monospace; font-size: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.12s, transform 0.08s; }
+.key:hover { background: var(--primary-light); }
+.key:active { transform: scale(0.95); }
+.key.op { color: var(--accent-hover); font-weight: 700; }
+.key.fn { font-size: 12px; color: var(--primary-hover); }
+.key.clear { color: #dc2626; }
+.key.enter { background: linear-gradient(135deg, #1349b7 0%, #2095b6 100%); color: #fff; font-weight: 700; border-color: transparent; }
+.key.enter:hover { opacity: 0.92; }
+.graph-panel { flex: 1; position: relative; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); min-width: 0; overflow: hidden; }
+#graphCanvas { display: block; width: 100%; height: 100%; cursor: grab; touch-action: none; }
+#graphCanvas:active { cursor: grabbing; }
+.zoom-tools { position: absolute; bottom: 16px; right: 14px; display: flex; flex-direction: column; background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); }
+.zoom-tools button { border: none; background: none; width: 36px; height: 36px; color: var(--text-main); font-size: 14px; cursor: pointer; border-bottom: 1px solid #eef2f0; transition: var(--transition); }
+.zoom-tools button:last-child { border-bottom: none; }
+.zoom-tools button:hover { background: var(--primary-light); color: var(--primary-hover); }
+
+@media (max-width: 860px) {
+  .mode-toggle { display: flex; }
+  .logo-khmer { display: none; }
+  .app-body { padding: 8px; gap: 8px; }
+  .side-panel { position: absolute; inset: 8px; width: auto; display: none; }
+  .graph-panel { position: absolute; inset: 8px; width: auto; }
+  body.mode-expr .side-panel { display: flex; }
+  body.mode-expr .graph-panel { display: none; }
+  body.mode-graph .side-panel { display: none; }
+  body.mode-graph .graph-panel { display: block; }
+  .expr-list { max-height: 34%; }
+}
+.photo { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; margin-right: -3px; }
+.calc-btn { display: flex; align-items: center; gap: 8px; height: 42px; padding: 0 16px; border: 0; border-radius: 12px; cursor: pointer; font: 700 14px var(--font-family-base); color: #fff; background: linear-gradient(135deg, #f59e0b, #ef6c3a); box-shadow: 0 6px 18px rgba(239,108,58,0.4); transition: var(--transition); }
+.calc-btn:hover { transform: translateY(-2px); }
+.calc-card { position: fixed; z-index: 60; display: none; flex-direction: column; right: 18px; top: 84px; width: 410px; max-height: calc(100vh - 100px); background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(148,163,184,0.35); border-radius: 22px; box-shadow: 0 30px 80px rgba(15,23,42,0.35); overflow: hidden; }
+body.calc-open .calc-card { display: flex; animation: ccIn 0.25s ease; }
+@keyframes ccIn { from { opacity: 0; transform: translateY(12px) scale(0.98); } to { opacity: 1; transform: none; } }
+.cc-head { display: flex; align-items: center; gap: 10px; padding: 14px 16px; color: #fff; background: linear-gradient(135deg, #0f2a6b, #1e4fd0 60%, #1b8fc4); }
+.cc-head h4 { flex: 1; font-size: 15px; font-weight: 700; }
+.seg { display: flex; background: rgba(255,255,255,0.18); border-radius: 10px; padding: 3px; }
+.seg button { border: 0; background: none; color: #fff; font: 700 12px var(--font-family-base); padding: 5px 12px; border-radius: 8px; cursor: pointer; }
+.seg button.on { background: #fff; color: #1e3a8a; }
+.cc-x { border: 0; background: rgba(255,255,255,0.18); color: #fff; width: 32px; height: 32px; border-radius: 10px; cursor: pointer; }
+.cc-body { padding: 14px; overflow: auto; }
+#calcInput { width: 100%; border: 2px solid #dbe4f3; border-radius: 14px; padding: 12px 14px; font: 500 18px "JetBrains Mono", "Kantumruy Pro", monospace; outline: 0; background: #f8fafc; transition: var(--transition); }
+#calcInput:focus { border-color: #2563eb; background: #fff; box-shadow: 0 0 0 4px rgba(37,99,235,0.12); }
+#calcResult { min-height: 46px; margin: 10px 2px; font: 700 26px "JetBrains Mono", "Kantumruy Pro", monospace; color: #1e3a8a; text-align: right; word-break: break-all; }
+#calcResult.err { color: #d16550; font-size: 15px; }
+.ck { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 8px; }
+.ck button { border: 0; border-radius: 11px; padding: 9px 0; font: 600 13px "JetBrains Mono", "Kantumruy Pro", monospace; cursor: pointer; color: #1e293b; background: linear-gradient(180deg, #fff, #eef2f9); box-shadow: 0 1px 0 #d5deee, 0 2px 6px rgba(30,58,138,0.08); transition: var(--transition); }
+.ck button:hover { transform: translateY(-1px); color: #2563eb; }
+.ck button:active { transform: scale(0.95); }
+.ck .n { font-size: 16px; }
+.ck .o { color: #fff; background: linear-gradient(135deg, #2563eb, #1e3a8a); }
+.ck .eq { color: #fff; background: linear-gradient(135deg, #16a34a, #15803d); }
+.ck .c { color: #fff; background: linear-gradient(135deg, #ef6c3a, #d16550); }
+.cc-hist { max-height: 96px; overflow: auto; font: 13px "JetBrains Mono", "Kantumruy Pro", monospace; color: #64748b; }
+.cc-hist div { display: flex; justify-content: space-between; gap: 10px; padding: 4px 6px; border-radius: 8px; cursor: pointer; }
+.cc-hist div:hover { background: #eef2f9; }
+.roots-box { position: absolute; left: 14px; bottom: 14px; max-width: 72%; padding: 10px 14px; border-radius: 14px; background: rgba(255,255,255,0.96); box-shadow: 0 10px 30px rgba(15,23,42,0.2); font-size: 13px; line-height: 1.7; display: none; cursor: pointer; }
+@media (max-width: 860px) {
+  .calc-card { left: 8px; right: 8px; top: auto; bottom: 8px; width: auto; max-height: 82vh; }
+  .calc-btn span { display: none; }
+  .calc-btn { padding: 0 13px; }
+}
+.expr-row.dirty { box-shadow: inset 3px 0 0 #f59e0b; }
+.expr-row.bad { box-shadow: inset 3px 0 0 #d16550; background: #fff1ee; }
+.g-toast { position: absolute; top: 14px; left: 50%; transform: translate(-50%, -20px); opacity: 0; pointer-events: none; padding: 9px 18px; border-radius: 12px; background: #d16550; color: #fff; font-weight: 700; box-shadow: 0 10px 30px rgba(209,101,80,0.4); transition: 0.3s; z-index: 5; }
+.g-toast.show { opacity: 1; transform: translate(-50%, 0); }
+.cam-btn { position: absolute; top: 14px; right: 14px; z-index: 4; width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #1e293b; background: #fff; border: 1px solid #a7e3b5; border-radius: 14px; cursor: pointer; box-shadow: 0 8px 22px rgba(15,23,42,0.14); transition: var(--transition); }
+.cam-btn:hover { color: #fff; background: linear-gradient(135deg, #2563eb, #1b8fc4); transform: translateY(-2px); }
+.cam-btn:active { transform: scale(0.94); }
+html { -webkit-text-size-adjust: 100%; }
+body { overscroll-behavior: none; }
+button, .key, .cat-key { touch-action: manipulation; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
+.key:active, .cat-key:active { transform: scale(0.94); }
+.graph-panel, .side-panel { box-shadow: 0 18px 50px rgba(30,58,138,0.12); }
+.calc-card { padding-bottom: env(safe-area-inset-bottom); }
+@media (max-width: 860px) {
+  header { height: 62px; padding: 8px max(14px, env(safe-area-inset-right)) 8px max(14px, env(safe-area-inset-left)); }
+  .app-body { height: calc(100vh - 62px); height: calc(100dvh - 62px); padding: 8px max(8px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left)); }
+  .side-panel, .graph-panel { inset: 8px max(8px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left)); border-radius: 20px; }
+  .photo { width: 38px; height: 38px; }
+  .logo { gap: 8px; }
+  .logo-text { font-size: 16px; white-space: nowrap; letter-spacing: 0.3px; }
+  .head-right { gap: 8px; }
+  .calc-btn { height: 40px; width: 40px; padding: 0; justify-content: center; border-radius: 12px; }
+  .mode-toggle button { min-width: 42px; height: 36px; }
+  .expr-input { font-size: 16px; }
+  .keypad-grid .key { min-height: 44px; font-size: 16px; }
+  .cat-key { min-height: 40px; }
+  .cam-btn { top: 10px; right: 10px; width: 44px; height: 44px; }
+  .calc-card { max-height: 84vh; max-height: 84dvh; border-radius: 24px 24px 0 0; left: 0; right: 0; bottom: 0; padding-bottom: max(8px, env(safe-area-inset-bottom)); }
+  .cc-head::before { content: ""; position: absolute; top: 6px; left: 50%; width: 38px; height: 4px; margin-left: -19px; border-radius: 4px; background: rgba(255,255,255,0.55); }
+  .cc-head { position: relative; padding-top: 18px; }
+  #calcInput { font-size: 17px; }
+}
+@media (max-width: 380px) {
+  header { padding-left: 10px; padding-right: 10px; }
+  .logo-text { font-size: 14px; }
+  .photo { width: 34px; height: 34px; }
+  .ck { gap: 5px; }
+  .ck button { font-size: 12px; padding: 8px 0; }
+  #calcResult { font-size: 22px; }
+}
+@media (max-height: 520px) and (max-width: 940px) {
+  .calc-card { max-height: calc(100dvh - 8px); }
+  .ck button { padding: 5px 0; }
+  #calcResult { min-height: 30px; margin: 4px 2px; font-size: 20px; }
+  .cc-hist { max-height: 56px; }
+}
+button, .key, .cat-key, input { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+canvas { touch-action: none; }
+body { overscroll-behavior: none; }
+.key:active, .cat-key:active { transform: scale(0.95); }
+.graph-panel { box-shadow: 0 18px 50px rgba(30,58,138,0.14); }
+@media (max-width: 860px) {
+  .expr-list { max-height: 24%; }
+  .cat-grid { grid-template-columns: repeat(4, 1fr); gap: 5px; margin-bottom: 6px; }
+  .cat-key { min-height: 34px; padding: 3px 2px; font-size: 12px; }
+  .keypad-grid { gap: 5px; }
+  .keypad-grid .key { min-height: 40px; }
+  .cc-body { display: flex; flex-direction: column; padding: 12px; }
+  #calcInput { order: 0; }
+  #calcResult { order: 1; min-height: 34px; margin: 6px 2px; font-size: 24px; }
+  #ckFn { order: 2; max-height: 142px; overflow-y: auto; padding-right: 2px; -webkit-overflow-scrolling: touch; }
+  #ckNum { order: 3; }
+  .cc-hist { order: 4; }
+  #ckNum button { padding: 11px 0; }
+}
+@media (max-width: 380px) {
+  .cat-key { font-size: 11px; }
+  .cc-head h4 { font-size: 13px; }
+  .seg button { padding: 5px 9px; }
+  .mode-toggle button { min-width: 38px; }
+}
+@media (max-width: 860px) {
+  .side-panel { overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .keypad-grid { flex: none; grid-template-rows: repeat(4, auto); }
+  .keypad-grid .key { min-height: 38px; }
+  .cat-key { min-height: 30px; }
+}
+@media (max-width: 860px) {
+  header .logo { min-width: 0; flex: 1 1 auto; overflow: hidden; }
+  header .logo-text { white-space: nowrap !important; font-size: clamp(12px, 4vw, 17px); line-height: 1.1; }
+  header .logo-text .live, header .logo-text .teaching { display: inline; white-space: nowrap; }
+  header .head-right { flex-shrink: 0; }
+}
+@media (max-width: 340px) {
+  header .photo { width: 30px; height: 30px; }
+  header .logo { gap: 6px; }
+  header .head-right { gap: 6px; }
+}
+
+/* ---------------- Header menu (new) ---------------- */
+header { position: relative; }
+.main-nav { flex: 1; display: flex; justify-content: center; align-items: center; gap: 34px; }
+.main-nav a { position: relative; color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; padding: 6px 2px; transition: var(--transition); }
+.main-nav a:hover { color: #bbf7d0; }
+.main-nav a.active::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; border-radius: 2px; background: #4ade80; }
+.nav-burger { display: none; width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; background: rgba(255,255,255,0.12); color: #fff; font-size: 16px; cursor: pointer; align-items: center; justify-content: center; }
+@media (max-width: 860px) {
+  .nav-burger { display: flex; }
+  .main-nav { position: absolute; top: 100%; left: 8px; right: 8px; flex: none; flex-direction: column; align-items: stretch; gap: 0; padding: 6px; display: none; background: linear-gradient(135deg, #1349b7 0%, #2095b6 100%); border-radius: 0 0 16px 16px; box-shadow: 0 16px 30px rgba(15,23,42,0.3); z-index: 1001; }
+  body.nav-open .main-nav { display: flex; }
+  .main-nav a { padding: 13px 14px; border-radius: 10px; font-size: 15px; }
+  .main-nav a:hover, .main-nav a.active { background: rgba(255,255,255,0.15); }
+  .main-nav a.active::after { display: none; }
+}
+</style>
+</head>
+<body class="mode-graph">
+<header>
+  <a href="#" class="logo">
+    <img src="https://i.postimg.cc/7ZjjMcdX/logo1213.jpg" alt="MY BOOKSHELF" class="photo" />
+    <div>
+      <div class="logo-text"><span class="live">MY</span> <span class="teaching">BOOKSHELF</span></div>
+      <div class="logo-khmer">graphing</div>
+    </div>
+  </a>
+
+  <nav class="main-nav" id="mainNav">
+    <a href="/index.html" class="active">ទំព័រដើម</a>
+    <a href="/library.html">បណ្ណាល័យ</a>
+    <a href="/news.html">ព័ត៌មានថ្មី</a>
+    <a href="/contact.html">ទំនាក់ទំនង</a>
+  </nav>
+
+  <div class="head-right">
+    <button class="calc-btn" onclick="toggleCalc()" title="ម៉ាស៊ីនគណនា">
+      <i class="fa-solid fa-calculator"></i><span>គណនា</span>
+    </button>
+    <div class="mode-toggle">
+      <button id="btnModeGraph" class="active" onclick="setMode('graph')" title="ក្រាហ្វិក"><i class="fa-solid fa-chart-line"></i></button>
+      <button id="btnModeExpr" onclick="setMode('expr')" title="កន្សោម"><i class="fa-solid fa-square-root-variable"></i></button>
+    </div>
+    <button class="nav-burger" onclick="toggleNav()" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</header>
+
+<div class="app-body">
+  <aside class="side-panel">
+    <div class="side-head">
+      <h3><i class="fa-solid fa-list-ul"></i> កន្សោមគណិតវិទ្យា</h3>
+      <span class="count-badge" id="exprCount">0</span>
+    </div>
+    <div class="expr-list" id="exprList"></div>
+    <button class="add-expr-btn" onclick="addExpression()"><i class="fa-solid fa-plus"></i> បន្ថែមកន្សោមថ្មី</button>
+
+    <div class="keypad-block">
+      <div class="filter-container">
+        <button class="cat-btn active" data-pane="numPane" onclick="switchCat('numPane', this)"><i class="fa-solid fa-hashtag"></i> ចំនួនពិត</button>
+        <button class="cat-btn" data-pane="fnPane" onclick="switchCat('fnPane', this)"><i class="fa-solid fa-square-root-variable"></i> អនុគមន៍</button>
+        <button class="cat-btn" data-pane="trigPane" onclick="switchCat('trigPane', this)"><i class="fa-solid fa-ruler-combined"></i> ត្រីកោណមាត្រ</button>
+        <button class="cat-btn" data-pane="ineqPane" onclick="switchCat('ineqPane', this)"><i class="fa-solid fa-scale-balanced"></i> វិសមភាព</button>
+      </div>
+
+      <div class="cat-pane cat-grid active" id="numPane">
+        <button class="cat-key" onclick="insertText('π')">π</button>
+        <button class="cat-key" onclick="insertText('e')">e</button>
+        <button class="cat-key" onclick="insertText('²')">x²</button>
+        <button class="cat-key" onclick="insertText('³')">x³</button>
+        <button class="cat-key" onclick="insertText('1/(')">1/x</button>
+        <button class="cat-key" onclick="insertText('ⁿ√(')">ⁿ√(</button>
+        <button class="cat-key" onclick="insertText('eˣ')">eˣ</button>
+        <button class="cat-key" onclick="insertText('10ˣ')">10ˣ</button>
+        <button class="cat-key" onclick="insertText('y=')">y=</button>
+      </div>
+      <div class="cat-pane cat-grid" id="fnPane">
+        <button class="cat-key" onclick="insertText('√(')">√(</button>
+        <button class="cat-key" onclick="insertText('abs(')">|x|</button>
+        <button class="cat-key" onclick="insertText('floor(')">floor(</button>
+        <button class="cat-key" onclick="insertText('ceil(')">ceil(</button>
+        <button class="cat-key" onclick="insertText('min(')">min(</button>
+        <button class="cat-key" onclick="insertText('max(')">max(</button>
+        <button class="cat-key" onclick="insertText('log(')">log(10)</button>
+        <button class="cat-key" onclick="insertText('ln(')">ln(</button>
+        <button class="cat-key" onclick="insertText('logₓ(')">logₓ(</button>
+        <button class="cat-key" onclick="insertText('∛(')">∛(</button>
+        <button class="cat-key" onclick="insertText('eˣ(')">eˣ(</button>
+        <button class="cat-key" onclick="insertText('!')">n!</button>
+        <button class="cat-key" onclick="insertText('combinations(')">nCr</button>
+        <button class="cat-key" onclick="insertText('permutations(')">nPr</button>
+        <button class="cat-key" onclick="insertText(' mod ')">mod</button>
+      </div>
+      <div class="cat-pane cat-grid" id="trigPane">
+        <button class="cat-key" onclick="insertText('sin(')">sin(</button>
+        <button class="cat-key" onclick="insertText('cos(')">cos(</button>
+        <button class="cat-key" onclick="insertText('tan(')">tan(</button>
+        <button class="cat-key" onclick="insertText('asin(')">sin⁻¹(</button>
+        <button class="cat-key" onclick="insertText('acos(')">cos⁻¹(</button>
+        <button class="cat-key" onclick="insertText('atan(')">tan⁻¹(</button>
+        <button class="cat-key" onclick="insertText('cot(')">cot(</button>
+        <button class="cat-key" onclick="insertText('sec(')">sec(</button>
+        <button class="cat-key" onclick="insertText('csc(')">csc(</button>
+        <button class="cat-key" onclick="insertText('acot(')">cot⁻¹(</button>
+        <button class="cat-key" onclick="insertText('sinh(')">sinh(</button>
+        <button class="cat-key" onclick="insertText('cosh(')">cosh(</button>
+        <button class="cat-key" onclick="insertText('tanh(')">tanh(</button>
+      </div>
+      <div class="cat-pane cat-grid" id="ineqPane">
+        <button class="cat-key" onclick="insertText('<')">&lt;</button>
+        <button class="cat-key" onclick="insertText('≤')">≤</button>
+        <button class="cat-key" onclick="insertText('>')">&gt;</button>
+        <button class="cat-key" onclick="insertText('≥')">≥</button>
+        <button class="cat-key" onclick="insertText('≠')">≠</button>
+        <button class="cat-key" onclick="insertText('y<')">y&lt;</button>
+        <button class="cat-key" onclick="insertText('y>')">y&gt;</button>
+        <button class="cat-key" onclick="insertText('y≤')">y≤</button>
+        <button class="cat-key" onclick="insertText('y≥')">y≥</button>
+        <button class="cat-key" onclick="insertText('x>')">x&gt;</button>
+        <button class="cat-key" onclick="insertText('x<')">x&lt;</button>
+      </div>
+
+      <div class="keypad-grid">
+        <button class="key" onclick="insertText('(')">(</button>
+        <button class="key" onclick="insertText(')')">)</button>
+        <button class="key" onclick="insertText('x')">x</button>
+        <button class="key" onclick="insertText('y')">y</button>
+        <button class="key clear" onclick="backspaceField()"><i class="fa-solid fa-delete-left"></i></button>
+
+        <button class="key" onclick="insertText('7')">7</button>
+        <button class="key" onclick="insertText('8')">8</button>
+        <button class="key" onclick="insertText('9')">9</button>
+        <button class="key op" onclick="insertText('÷')">÷</button>
+        <button class="key fn" onclick="insertText('^')">xʸ</button>
+
+        <button class="key" onclick="insertText('4')">4</button>
+        <button class="key" onclick="insertText('5')">5</button>
+        <button class="key" onclick="insertText('6')">6</button>
+        <button class="key op" onclick="insertText('×')">×</button>
+        <button class="key fn" onclick="insertText('ln(')">ln</button>
+
+        <button class="key" onclick="insertText('1')">1</button>
+        <button class="key" onclick="insertText('2')">2</button>
+        <button class="key" onclick="insertText('3')">3</button>
+        <button class="key op" onclick="insertText('−')">−</button>
+        <button class="key clear" onclick="clearFocusedField()">C</button>
+
+        <button class="key" onclick="insertText('0')">0</button>
+        <button class="key" onclick="insertText('.')">.</button>
+        <button class="key enter" onclick="insertText('=')">=</button>
+        <button class="key op" onclick="insertText('+')">+</button>
+        <button class="key enter" onclick="plotFocused()" title="គូសក្រាហ្វិក"><i class="fa-solid fa-check"></i></button>
+      </div>
+    </div>
+  </aside>
+
+  <main class="graph-panel">
+    <canvas id="graphCanvas"></canvas>
+
+    <div class="zoom-tools">
+      <button onclick="zoomGraph(0.8)"><i class="fa-solid fa-plus"></i></button>
+      <button onclick="zoomGraph(1.25)"><i class="fa-solid fa-minus"></i></button>
+      <button onclick="resetView()"><i class="fa-solid fa-crosshairs"></i></button>
+      <button onclick="findRoots()" title="រកឫស f(x)=0"><i class="fa-solid fa-bullseye"></i></button>
+    </div>
+    <button class="cam-btn" onclick="shareGraph()" title="ថតរូបក្រាប"><i class="fa-solid fa-camera"></i></button>
+    <div class="g-toast" id="gToast"></div>
+    <div class="roots-box" id="rootsBox" onclick="this.style.display = 'none'"></div>
+  </main>
+</div>
+
+<div class="calc-card" id="calcCard">
+  <div class="cc-head">
+    <i class="fa-solid fa-calculator"></i>
+    <h4>ម៉ាស៊ីនគណនា</h4>
+    <div class="seg">
+      <button id="aDeg" class="on" onclick="setAng(true)">DEG</button><button id="aRad" onclick="setAng(false)">RAD</button>
+    </div>
+    <button class="cc-x" onclick="toggleCalc()"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="cc-body">
+    <input id="calcInput" placeholder="សរសេរ ឧ. sin(30) រួចចុច =" autocomplete="off" spellcheck="false" />
+    <div id="calcResult"></div>
+    <div class="ck" id="ckFn"></div>
+    <div class="ck" id="ckNum"></div>
+    <div class="cc-hist" id="calcHist"></div>
+  </div>
+</div>
+
+<script>
+const footerEl = document.querySelector(".footer");
+if (footerEl) {
+  const footerObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        footerEl.classList.add("in-view");
+        footerObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  footerObserver.observe(footerEl);
+}
+
+const colors = ["#16a34a", "#eab308", "#1349b7", "#d16550", "#2095b6", "#9333ea"];
+let expressions = [];
+let exprIdCounter = 0;
+let focusedInput = null;
+
+/* ---------------- Normalization & Pre-parsing Engine ---------------- */
+function normalizeSymbols(expr) {
+  if (!expr) return "";
+  return expr
+    .replace(/²/g, "^2").replace(/³/g, "^3").replace(/⁴/g, "^4").replace(/⁵/g, "^5")
+    .replace(/⁶/g, "^6").replace(/⁷/g, "^7").replace(/⁸/g, "^8").replace(/⁹/g, "^9").replace(/⁰/g, "^0")
+    .replace(/eˣ/g, "exp").replace(/10ˣ/g, "10^")
+    .replace(/ⁿ√\(/g, "nthRoot(").replace(/∛\(/g, "cbrt(").replace(/√\(/g, "sqrt(")
+    .replace(/logₓ\(/g, "logx(")
+    .replace(/≤/g, "<=").replace(/≥/g, ">=").replace(/≠/g, "!=")
+    .replace(/×/g, "*").replace(/÷/g, "/").replace(/−/g, "-");
+}
+
+function preprocessMath(expr) {
+  if (!expr) return "";
+  let str = normalizeSymbols(expr);
+  str = str.replace(/π/g, "pi");
+
+  const functions = [
+    "sin", "cos", "tan", "asin", "acos", "atan", "sinh", "cosh", "tanh", "cot", "sec", "csc", "acot",
+    "sqrt", "cbrt", "nthRoot", "abs", "floor", "ceil", "min", "max", "logx", "log", "ln", "exp",
+    "gcd", "lcm", "combinations", "permutations",
+  ];
+
+  // Protect function names during pre-parsing
+  const fnPlaceholders = [];
+  functions.forEach((fn, idx) => {
+    const placeholder = `__FN${idx}__`;
+    const regex = new RegExp(`\\b${fn}\\b`, "g");
+    str = str.replace(regex, (match) => {
+      fnPlaceholders.push({ placeholder, original: fn });
+      return placeholder;
+    });
+  });
+
+  // Implicit multiplication regex transformations
+  str = str.replace(/(\^[\d.a-zA-Z]+|\^[a-zA-Z]|\^\([^)]+\))\s*([xye]|pi|__FN\d+__|[a-zA-Z]|\()/g, "$1*$2");
+  str = str.replace(/(\d+|pi)\s*([xy]|__FN\d+__|[a-zA-Z]|\()/g, "$1*$2");
+  str = str.replace(/(\))\s*(\(|\d+|pi|[xy]|__FN\d+__|[a-zA-Z])/g, "$1*$2");
+  str = str.replace(/([xy])\s*(\(|\d+|pi|[xy]|__FN\d+__)/g, "$1*$2");
+
+  // Restore original function names
+  fnPlaceholders.forEach(({ placeholder, original }) => {
+    str = str.replace(new RegExp(placeholder, "g"), original);
+  });
+
+  return str;
+}
+
+function mkScope(deg) {
+  const t = deg ? Math.PI / 180 : 1, it = deg ? 180 / Math.PI : 1;
+  return {
+    sin: (x) => Math.sin(x * t),
+    cos: (x) => Math.cos(x * t),
+    tan: (x) => Math.tan(x * t),
+    cot: (x) => 1 / Math.tan(x * t),
+    sec: (x) => 1 / Math.cos(x * t),
+    csc: (x) => 1 / Math.sin(x * t),
+    asin: (x) => Math.asin(x) * it,
+    acos: (x) => Math.acos(x) * it,
+    atan: (x) => Math.atan(x) * it,
+    acot: (x) => (Math.PI / 2 - Math.atan(x)) * it,
+    ln: Math.log,
+    logx: (b, x) => Math.log(x) / Math.log(b),
+    log: (x, b) => (b === undefined ? Math.log10(x) : Math.log(x) / Math.log(b)),
+  };
+}
+const GS = mkScope(false);
+let roots = [];
+
+let view = { xmin: -10, xmax: 10, ymin: -10, ymax: 10 };
+const defaultView = { xmin: -10, xmax: 10, ymin: -10, ymax: 10 };
+
+const canvas = document.getElementById("graphCanvas");
+const ctx = canvas.getContext("2d");
+
+function setMode(mode) {
+  document.body.classList.remove("mode-graph", "mode-expr");
+  document.body.classList.add("mode-" + mode);
+  document.getElementById("btnModeGraph").classList.toggle("active", mode === "graph");
+  document.getElementById("btnModeExpr").classList.toggle("active", mode === "expr");
+  setTimeout(resizeCanvas, 50);
+}
+
+function switchCat(paneId, btn) {
+  document.querySelectorAll(".cat-btn").forEach((b) => b.classList.remove("active"));
+  document.querySelectorAll(".cat-pane").forEach((p) => p.classList.remove("active"));
+  btn.classList.add("active");
+  document.getElementById(paneId).classList.add("active");
+}
+
+function addExpression(text = "") {
+  const id = "e" + exprIdCounter++;
+  const color = colors[expressions.length % colors.length];
+  expressions.push({ id, text, plot: "", color, visible: true });
+  renderExprList();
+  return id;
+}
+
+function removeExpression(id) {
+  expressions = expressions.filter((e) => e.id !== id);
+  roots = [];
+  renderExprList();
+  drawGraph();
+}
+
+function renderExprList() {
+  const list = document.getElementById("exprList");
+  list.innerHTML = "";
+  expressions.forEach((expr, idx) => {
+    const row = document.createElement("div");
+    row.className = "expr-row";
+    row.dataset.id = expr.id;
+    row.classList.toggle("dirty", expr.text.trim() !== (expr.plot || "").trim());
+    row.classList.toggle("bad", !!expr.bad);
+
+    const chip = document.createElement("div");
+    chip.className = "expr-chip";
+    chip.style.background = expr.color;
+    chip.innerHTML = "f<sub>" + (idx + 1) + "</sub>";
+    chip.onclick = () => cycleColor(expr.id);
+
+    const input = document.createElement("input");
+    input.className = "expr-input";
+    input.placeholder = "y = f(x) ឬ កន្សោមស្មើគ្នា";
+    input.value = expr.text;
+    input.dataset.id = expr.id;
+    input.autocomplete = "off";
+    input.spellcheck = false;
+    input.oninput = (e) => {
+      expr.text = e.target.value;
+      roots = [];
+      row.classList.toggle("dirty", expr.text.trim() !== (expr.plot || "").trim());
+      row.classList.remove("bad");
+    };
+    input.onfocus = () => {
+      focusedInput = input;
+      document.querySelectorAll(".expr-row").forEach((r) => r.classList.remove("focused"));
+      row.classList.add("focused");
+    };
+    input.onkeydown = (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        plotFocused();
+      }
+    };
+
+    const del = document.createElement("button");
+    del.className = "expr-del";
+    del.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+    del.onclick = () => removeExpression(expr.id);
+
+    row.appendChild(chip);
+    row.appendChild(input);
+    row.appendChild(del);
+    list.appendChild(row);
+  });
+  document.getElementById("exprCount").textContent = expressions.length;
+}
+
+function cycleColor(id) {
+  const expr = expressions.find((e) => e.id === id);
+  if (!expr) return;
+  const idx = colors.indexOf(expr.color);
+  expr.color = colors[(idx + 1) % colors.length];
+  renderExprList();
+  drawGraph();
+  focusInputById(id);
+}
+
+function focusInputById(id) {
+  const el = document.querySelector('.expr-input[data-id="' + id + '"]');
+  if (el) el.focus();
+}
+
+function insertText(txt) {
+  if (!focusedInput) {
+    const id = addExpression("");
+    focusInputById(id);
+  }
+  const input = focusedInput;
+  if (!input) return;
+  const start = input.selectionStart ?? input.value.length;
+  const end = input.selectionEnd ?? input.value.length;
+  const val = input.value;
+  input.value = val.slice(0, start) + txt + val.slice(end);
+  const cursor = start + txt.length;
+  input.setSelectionRange(cursor, cursor);
+  input.dispatchEvent(new Event("input"));
+  input.focus();
+}
+
+function backspaceField() {
+  const input = focusedInput;
+  if (!input) return;
+  const start = input.selectionStart ?? input.value.length;
+  const end = input.selectionEnd ?? input.value.length;
+  const val = input.value;
+  if (start === end && start > 0) {
+    input.value = val.slice(0, start - 1) + val.slice(end);
+    input.setSelectionRange(start - 1, start - 1);
+  } else {
+    input.value = val.slice(0, start) + val.slice(end);
+    input.setSelectionRange(start, start);
+  }
+  input.dispatchEvent(new Event("input"));
+  input.focus();
+}
+
+function clearFocusedField() {
+  const input = focusedInput;
+  if (!input) return;
+  input.value = "";
+  input.dispatchEvent(new Event("input"));
+  input.focus();
+}
+
+function resizeCanvas() {
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width * devicePixelRatio;
+  canvas.height = rect.height * devicePixelRatio;
+  canvas.style.width = rect.width + "px";
+  canvas.style.height = rect.height + "px";
+  ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+  drawGraph();
+}
+
+function toPx(x, y, w, h) {
+  const px = ((x - view.xmin) / (view.xmax - view.xmin)) * w;
+  const py = h - ((y - view.ymin) / (view.ymax - view.ymin)) * h;
+  return [px, py];
+}
+
+function niceStep(range, targetTicks) {
+  const rough = range / targetTicks;
+  const mag = Math.pow(10, Math.floor(Math.log10(rough)));
+  const norm = rough / mag;
+  let step;
+  if (norm < 1.5) step = 1;
+  else if (norm < 3) step = 2;
+  else if (norm < 7) step = 5;
+  else step = 10;
+  return step * mag;
+}
+
+function drawGraph() {
+  const w = canvas.width / devicePixelRatio;
+  const h = canvas.height / devicePixelRatio;
+  ctx.clearRect(0, 0, w, h);
+
+  const xStep = niceStep(view.xmax - view.xmin, 10);
+  const yStep = niceStep(view.ymax - view.ymin, 10);
+
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = "#eef2f0";
+  ctx.font = '11px "Kantumruy Pro", sans-serif';
+  ctx.fillStyle = "#94a3b8";
+
+  let xStart = Math.ceil(view.xmin / xStep) * xStep;
+  for (let x = xStart; x <= view.xmax; x += xStep) {
+    const [px] = toPx(x, 0, w, h);
+    ctx.beginPath();
+    ctx.moveTo(px, 0);
+    ctx.lineTo(px, h);
+    ctx.stroke();
+    if (Math.abs(x) > xStep / 100) {
+      const [, py0] = toPx(0, 0, w, h);
+      ctx.fillText(formatNum(x), px + 4, Math.min(Math.max(py0 + 14, 12), h - 4));
+    }
+  }
+
+  let yStart = Math.ceil(view.ymin / yStep) * yStep;
+  for (let y = yStart; y <= view.ymax; y += yStep) {
+    const [, py] = toPx(0, y, w, h);
+    ctx.beginPath();
+    ctx.moveTo(0, py);
+    ctx.lineTo(w, py);
+    ctx.stroke();
+    if (Math.abs(y) > yStep / 100) {
+      const [px0] = toPx(0, 0, w, h);
+      ctx.fillText(formatNum(y), Math.min(Math.max(px0 + 4, 2), w - 24), py - 4);
+    }
+  }
+
+  ctx.strokeStyle = "#3d4c64";
+  ctx.lineWidth = 1.6;
+  const [px0, py0] = toPx(0, 0, w, h);
+  ctx.beginPath();
+  ctx.moveTo(0, py0);
+  ctx.lineTo(w, py0);
+  ctx.moveTo(px0, 0);
+  ctx.lineTo(px0, h);
+  ctx.stroke();
+
+  ctx.fillStyle = "#3d4c64";
+  ctx.font = 'italic 13px "Kantumruy Pro", sans-serif';
+  ctx.fillText("x", w - 16, py0 - 8);
+  ctx.fillText("y", px0 + 8, 14);
+
+  expressions.forEach((expr) => plotExpression(expr, w, h));
+  drawRoots(w, h);
+}
+
+function formatNum(n) {
+  const r = Math.round(n * 1000) / 1000;
+  return r.toString();
+}
+
+/* ---------------- Enhanced Equation Parsing & Classification ---------------- */
+function parseImplicitEq(text) {
+  const eqMatch = text.match(/^(.*?)=(.*)$/);
+  if (!eqMatch) return null;
+  const lhsStr = preprocessMath(eqMatch[1].trim());
+  const rhsStr = preprocessMath(eqMatch[2].trim());
+  if (!lhsStr || !rhsStr) return null;
+  try {
+    const lhsCompiled = math.compile(lhsStr);
+    const rhsCompiled = math.compile(rhsStr);
+    return (x, y) => {
+      GS.x = x;
+      GS.y = y;
+      try {
+        const lVal = lhsCompiled.evaluate(GS);
+        const rVal = rhsCompiled.evaluate(GS);
+        if (typeof lVal !== "number" || typeof rVal !== "number") return NaN;
+        return lVal - rVal;
+      } catch (_) {
+        return NaN;
+      }
+    };
+  } catch (_) {
+    return null;
+  }
+}
+
+/* Marching Squares for Implicit Curves */
+function plotImplicitCurve(evalFn, color, w, h) {
+  const step = Math.max(2, Math.floor(w / 280));
+  const cols = Math.ceil(w / step);
+  const rows = Math.ceil(h / step);
+  const grid = new Float32Array((cols + 1) * (rows + 1));
+
+  for (let r = 0; r <= rows; r++) {
+    const py = r * step;
+    const y = view.ymax - (py / h) * (view.ymax - view.ymin);
+    for (let c = 0; c <= cols; c++) {
+      const px = c * step;
+      const x = view.xmin + (px / w) * (view.xmax - view.xmin);
+      grid[r * (cols + 1) + c] = evalFn(x, y);
+    }
+  }
+
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2.4;
+  ctx.beginPath();
+
+  const lerp = (v0, v1) => {
+    if (v0 === v1 || isNaN(v0) || isNaN(v1)) return 0.5;
+    const t = -v0 / (v1 - v0);
+    return Math.max(0, Math.min(1, t));
+  };
+
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const idx0 = r * (cols + 1) + c;
+      const idx1 = idx0 + 1;
+      const idx3 = (r + 1) * (cols + 1) + c;
+      const idx2 = idx3 + 1;
+
+      const v0 = grid[idx0], v1 = grid[idx1], v2 = grid[idx2], v3 = grid[idx3];
+
+      if (isNaN(v0) || isNaN(v1) || isNaN(v2) || isNaN(v3)) continue;
+
+      const state = (v0 > 0 ? 1 : 0) | (v1 > 0 ? 2 : 0) | (v2 > 0 ? 4 : 0) | (v3 > 0 ? 8 : 0);
+
+      if (state === 0 || state === 15) continue;
+
+      const x0 = c * step, y0 = r * step;
+      const x1 = (c + 1) * step, y1 = (r + 1) * step;
+
+      const top = [x0 + step * lerp(v0, v1), y0];
+      const right = [x1, y0 + step * lerp(v1, v2)];
+      const bottom = [x0 + step * lerp(v3, v2), y1];
+      const left = [x0, y0 + step * lerp(v0, v3)];
+
+      const line = (pA, pB) => {
+        ctx.moveTo(pA[0], pA[1]);
+        ctx.lineTo(pB[0], pB[1]);
+      };
+
+      switch (state) {
+        case 1: case 14: line(left, top); break;
+        case 2: case 13: line(top, right); break;
+        case 3: case 12: line(left, right); break;
+        case 4: case 11: line(right, bottom); break;
+        case 5: line(left, top); line(right, bottom); break;
+        case 6: case 9: line(top, bottom); break;
+        case 7: case 8: line(left, bottom); break;
+        case 10: line(top, right); line(left, bottom); break;
+      }
+    }
+  }
+  ctx.stroke();
+}
+
+function plotExpression(expr, w, h) {
+  const text = (expr.plot || "").trim();
+  if (!text) return;
+  if (plotIneq(expr, text, w, h)) return;
+
+  // Check for x = f(y) equations
+  const xm = text.match(/^\s*x\s*=\s*(.+)$/i);
+  if (xm) {
+    let compiledY;
+    try {
+      compiledY = math.compile(preprocessMath(xm[1]));
+    } catch (_) {}
+
+    if (compiledY) {
+      ctx.strokeStyle = expr.color;
+      ctx.lineWidth = 2.6;
+      ctx.beginPath();
+      let started = false;
+      const samples = Math.floor(h * 1.5);
+      let prevPx = null;
+
+      for (let i = 0; i <= samples; i++) {
+        const y = view.ymin + (view.ymax - view.ymin) * (i / samples);
+        let x;
+        try {
+          GS.y = y;
+          GS.x = 0;
+          x = compiledY.evaluate(GS);
+        } catch (_) {
+          started = false;
+          continue;
+        }
+        if (typeof x !== "number" || !isFinite(x)) {
+          started = false;
+          continue;
+        }
+        const [px, py] = toPx(x, y, w, h);
+        if (prevPx !== null && Math.abs(px - prevPx) > w * 1.5) started = false;
+        if (!started) {
+          ctx.moveTo(px, py);
+          started = true;
+        } else {
+          ctx.lineTo(px, py);
+        }
+        prevPx = px;
+      }
+      ctx.stroke();
+      return;
+    }
+  }
+
+  // Implicit equation handling
+  if (text.includes("=") && !/^\s*y\s*=/i.test(text)) {
+    const evalFn = parseImplicitEq(text);
+    if (evalFn) {
+      plotImplicitCurve(evalFn, expr.color, w, h);
+      return;
+    }
+  }
+
+  // Standard explicit function y = f(x)
+  let rhs = text;
+  const eqMatch = text.match(/^\s*y\s*=\s*(.+)$/i);
+  if (eqMatch) rhs = eqMatch[1];
+
+  let compiled;
+  try {
+    compiled = math.compile(preprocessMath(rhs));
+  } catch (err) {
+    return;
+  }
+
+  ctx.strokeStyle = expr.color;
+  ctx.lineWidth = 2.6;
+  ctx.beginPath();
+
+  let started = false;
+  const samples = Math.floor(w * 1.5);
+  let prevY = null;
+  let prevPy = null;
+
+  for (let i = 0; i <= samples; i++) {
+    const x = view.xmin + (view.xmax - view.xmin) * (i / samples);
+    let y;
+    try {
+      GS.x = x;
+      GS.y = 0;
+      y = compiled.evaluate(GS);
+    } catch (err) {
+      started = false;
+      continue;
+    }
+    if (typeof y !== "number" || !isFinite(y)) {
+      started = false;
+      continue;
+    }
+    const [px, py] = toPx(x, y, w, h);
+
+    if (
+      prevY !== null &&
+      ((prevY > 0 && y < 0) || (prevY < 0 && y > 0)) &&
+      Math.abs(y - prevY) > (view.ymax - view.ymin) * 0.8
+    ) {
+      started = false;
+    } else if (prevPy !== null && Math.abs(py - prevPy) > h * 1.5) {
+      started = false;
+    }
+
+    if (!started) {
+      ctx.moveTo(px, py);
+      started = true;
+    } else {
+      ctx.lineTo(px, py);
+    }
+    prevY = y;
+    prevPy = py;
+  }
+  ctx.stroke();
+}
+
+let isDragging = false;
+let dragStart = null;
+let viewStart = null;
+
+function panStart(x, y) {
+  isDragging = true;
+  dragStart = { x, y };
+  viewStart = { ...view };
+}
+function panMove(x, y) {
+  if (!isDragging) return;
+  const w = canvas.width / devicePixelRatio;
+  const h = canvas.height / devicePixelRatio;
+  const dx = ((x - dragStart.x) / w) * (viewStart.xmax - viewStart.xmin);
+  const dy = ((y - dragStart.y) / h) * (viewStart.ymax - viewStart.ymin);
+  view.xmin = viewStart.xmin - dx;
+  view.xmax = viewStart.xmax - dx;
+  view.ymin = viewStart.ymin + dy;
+  view.ymax = viewStart.ymax + dy;
+  drawGraph();
+}
+function panEnd() {
+  isDragging = false;
+}
+
+canvas.addEventListener("mousedown", (e) => panStart(e.clientX, e.clientY));
+window.addEventListener("mousemove", (e) => panMove(e.clientX, e.clientY));
+window.addEventListener("mouseup", panEnd);
+
+canvas.addEventListener("touchstart", (e) => {
+  const t = e.touches[0];
+  panStart(t.clientX, t.clientY);
+}, { passive: true });
+canvas.addEventListener("touchmove", (e) => {
+  const t = e.touches[0];
+  panMove(t.clientX, t.clientY);
+  e.preventDefault();
+}, { passive: false });
+canvas.addEventListener("touchend", panEnd);
+
+canvas.addEventListener("wheel", (e) => {
+  e.preventDefault();
+  const factor = e.deltaY > 0 ? 1.1 : 0.9;
+  zoomGraph(factor);
+}, { passive: false });
+
+function zoomGraph(factor) {
+  const cx = (view.xmin + view.xmax) / 2;
+  const cy = (view.ymin + view.ymax) / 2;
+  const halfW = ((view.xmax - view.xmin) / 2) * factor;
+  const halfH = ((view.ymax - view.ymin) / 2) * factor;
+  view.xmin = cx - halfW;
+  view.xmax = cx + halfW;
+  view.ymin = cy - halfH;
+  view.ymax = cy + halfH;
+  drawGraph();
+}
+
+function resetView() {
+  view = { ...defaultView };
+  drawGraph();
+}
+
+window.addEventListener("resize", resizeCanvas);
+
+resizeCanvas();
+renderExprList();
+
+function drawRoots(w, h) {
+  roots.forEach((r) => {
+    const [px, py] = toPx(r.x, 0, w, h);
+    ctx.beginPath();
+    ctx.arc(px, py, 6, 0, 7);
+    ctx.fillStyle = "#fff";
+    ctx.fill();
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = r.color;
+    ctx.stroke();
+  });
+}
+function findRoots() {
+  roots = [];
+  const N = 1500;
+  expressions.forEach((e) => {
+    if (!e.plot || parseIneq(e.plot) || /^\s*x\s*=/i.test(e.plot)) return;
+    const m = e.plot.trim().match(/^y\s*=\s*(.+)$/i);
+    const rhs = m ? m[1] : e.plot.trim();
+    if (!rhs) return;
+    let c;
+    try {
+      c = math.compile(preprocessMath(rhs));
+    } catch (_) {
+      return;
+    }
+    const f = (x) => {
+      GS.x = x;
+      try {
+        const v = c.evaluate(GS);
+        return typeof v === "number" && isFinite(v) ? v : NaN;
+      } catch (_) {
+        return NaN;
+      }
+    };
+    let px = view.xmin, py = f(px);
+    for (let i = 1; i <= N; i++) {
+      const x = view.xmin + ((view.xmax - view.xmin) * i) / N, y = f(x);
+      if (!isNaN(py) && !isNaN(y) && py * y <= 0 && py !== y) {
+        let a = px, b = x;
+        for (let k = 0; k < 60; k++) {
+          const mid = (a + b) / 2;
+          if (f(a) * f(mid) <= 0) b = mid;
+          else a = mid;
+        }
+        const r = (a + b) / 2;
+        if (Math.abs(f(r)) < 1e-5 && !roots.some((q) => Math.abs(q.x - r) < 1e-6))
+          roots.push({ x: r, color: e.color });
+      }
+      px = x;
+      py = y;
+    }
+  });
+  roots.sort((p, q) => p.x - q.x);
+  const box = document.getElementById("rootsBox");
+  box.innerHTML = roots.length
+    ? "<b>ឫស f(x)=0</b><br>" +
+      roots.slice(0, 14).map((r) => "x = " + parseFloat(r.x.toPrecision(8))).join("<br>")
+    : "រកមិនឃើញឫសក្នុងចន្លោះនេះទេ";
+  box.style.display = "block";
+  drawGraph();
+}
+
+function parseIneq(text) {
+  const m = text.match(/^(.*?)(<=|>=|≤|≥|<|>|!=|≠)(.*)$/);
+  if (!m) return null;
+  const l = m[1].trim(), op = m[2], r = m[3].trim();
+  if (!l || !r) return null;
+  return { l, op, r };
+}
+
+let calcDeg = true, lastAns = 0, calcHist = [];
+const cInp = document.getElementById("calcInput");
+const cOut = document.getElementById("calcResult");
+
+function toggleCalc() {
+  document.body.classList.toggle("calc-open");
+  if (document.body.classList.contains("calc-open")) {
+    setTimeout(() => cInp.focus(), 100);
+  }
+}
+
+function setAng(deg) {
+  calcDeg = deg;
+  document.getElementById("aDeg").classList.toggle("on", deg);
+  document.getElementById("aRad").classList.toggle("on", !deg);
+  calcEval(false);
+}
+
+cInp.addEventListener("input", () => calcEval(false));
+cInp.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    calcEval(true);
+  }
+});
+
+function fmtRes(n) {
+  if (typeof n !== "number" || !isFinite(n)) return "Error";
+  if (Math.abs(n) < 1e-12) return "0";
+  if (Math.abs(n) >= 1e10 || (Math.abs(n) < 1e-4 && Math.abs(n) > 0)) {
+    return n.toExponential(6);
+  }
+  return parseFloat(n.toFixed(8)).toString();
+}
+
+function calcEval(commit) {
+  const q = cInp.value.trim();
+  if (!q) {
+    cOut.textContent = "";
+    return;
+  }
+  try {
+    const sc = mkScope(calcDeg);
+    sc.ans = lastAns;
+    const processedQ = preprocessMath(q.replace(/×/g, "*").replace(/÷/g, "/").replace(/√/g, "sqrt"));
+    const v = math.evaluate(processedQ, sc);
+    const r = fmtRes(v);
+    cOut.className = "";
+    cOut.textContent = "= " + r;
+    if (commit && typeof v === "number" && isFinite(v)) {
+      lastAns = v;
+      calcHist.unshift([q, r]);
+      calcHist = calcHist.slice(0, 8);
+      document.getElementById("calcHist").innerHTML = "";
+      calcHist.forEach(([a, b]) => {
+        const d = document.createElement("div");
+        d.innerHTML = "<span></span><b></b>";
+        d.children[0].textContent = a;
+        d.children[1].textContent = "= " + b;
+        d.onclick = () => {
+          cInp.value = a;
+          cOut.textContent = "";
+        };
+        document.getElementById("calcHist").appendChild(d);
+      });
+    }
+  } catch (_) {
+    cOut.className = "err";
+    cOut.textContent = "Error system";
+  }
+}
+function cIns(t) {
+  cInp.value += t;
+  calcEval(false);
+  cInp.focus();
+}
+
+const fk = [
+  ["sin", "cos", "tan", "ln", "log"],
+  ["√", "^", "(", ")", "π"],
+];
+const nk = [
+  ["7", "8", "9", "÷", "C"],
+  ["4", "5", "6", "×", "<-"],
+  ["1", "2", "3", "−", "ans"],
+  ["0", ".", "=", "+", ""],
+];
+const fnBox = document.getElementById("ckFn");
+const numBox = document.getElementById("ckNum");
+
+fk.forEach((row) => {
+  row.forEach((k) => {
+    if (!k) return;
+    const b = document.createElement("button");
+    b.textContent = k;
+    b.onclick = () => cIns(k + "(");
+    fnBox.appendChild(b);
+  });
+});
+
+nk.forEach((row) => {
+  row.forEach((k) => {
+    if (!k) return;
+    const b = document.createElement("button");
+    b.textContent = k;
+    if (k >= "0" && k <= "9") b.className = "n";
+    else if ("+−×÷".includes(k)) b.className = "o";
+    else if (k === "=") b.className = "eq";
+    else if (k === "C") b.className = "c";
+
+    b.onclick = () => {
+      if (k === "C") {
+        cInp.value = "";
+        cOut.textContent = "";
+      } else if (k === "<-") {
+        cInp.value = cInp.value.slice(0, -1);
+        calcEval(false);
+      } else if (k === "=") {
+        calcEval(true);
+      } else if (k === "ans") {
+        cIns("ans");
+      } else {
+        cIns(k);
+      }
+    };
+    numBox.appendChild(b);
+  });
+});
+
+function gMsg(m, ok) {
+  const t = document.getElementById("gToast");
+  t.textContent = m;
+  t.style.background = ok ? "#16a34a" : "#d16550";
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2800);
+}
+
+function checkExpr(t) {
+  t = t.trim();
+  if (!t) return true;
+  const q = parseIneq(t);
+  if (q) return true;
+
+  if (t.includes("=")) {
+    const parts = t.split("=");
+    if (parts.length === 2 && parts[0].trim() && parts[1].trim()) {
+      return true;
+    }
+    return false;
+  }
+
+  try {
+    const c = math.compile(preprocessMath(t));
+    let ok = false;
+    for (const x of [-10, -1, 0, 1, 10]) {
+      GS.x = x;
+      GS.y = x;
+      try {
+        const v = c.evaluate(GS);
+        if (typeof v === "number" && isFinite(v)) {
+          ok = true;
+          break;
+        }
+      } catch (_) {}
+    }
+    return ok;
+  } catch (_) {
+    return false;
+  }
+}
+
+function plotFocused() {
+  if (!focusedInput) {
+    const id = addExpression("");
+    focusInputById(id);
+  }
+  const input = focusedInput;
+  if (!input) return;
+  const expr = expressions.find((e) => e.id === input.dataset.id);
+  if (!expr) return;
+  const val = input.value.trim();
+  if (!val) {
+    expr.plot = "";
+    expr.bad = false;
+    renderExprList();
+    drawGraph();
+    return;
+  }
+  if (checkExpr(val)) {
+    expr.plot = val;
+    expr.bad = false;
+    renderExprList();
+    drawGraph();
+    if (window.innerWidth <= 860) setMode("graph");
+  } else {
+    expr.bad = true;
+    renderExprList();
+    gMsg("កន្សោមមិនត្រឹមត្រូវ!");
+  }
+}
+
+function plotIneq(expr, text, w, h) {
+  const q = parseIneq(text);
+  if (!q) return false;
+  const mk = (src) => {
+    if (src === "x") return (x) => x;
+    if (src === "y") return (x, y) => y;
+    let c;
+    try {
+      c = math.compile(preprocessMath(src));
+    } catch (_) {
+      return null;
+    }
+    return (x, y) => {
+      GS.x = x;
+      GS.y = y;
+      try {
+        const v = c.evaluate(GS);
+        return typeof v === "number" ? v : NaN;
+      } catch (_) {
+        return NaN;
+      }
+    };
+  };
+  const A = mk(q.l), B = mk(q.r);
+  if (!A || !B) return true;
+  const opNorm = normalizeSymbols(q.op);
+  const test = {
+    "<": (a, b) => a < b,
+    "<=": (a, b) => a <= b,
+    ">": (a, b) => a > b,
+    ">=": (a, b) => a >= b,
+    "!=": (a, b) => Math.abs(a - b) > 1e-9,
+  }[opNorm];
+  if (!test) return false;
+
+  const S = Math.max(4, Math.ceil(Math.sqrt((w * h) / 22000)));
+  ctx.save();
+  ctx.fillStyle = expr.color;
+  ctx.globalAlpha = 0.2;
+  for (let py = 0; py < h; py += S)
+    for (let px = 0; px < w; px += S) {
+      const x = view.xmin + ((view.xmax - view.xmin) * (px + S / 2)) / w;
+      const y = view.ymax - ((view.ymax - view.ymin) * (py + S / 2)) / h;
+      const a = A(x, y), b = B(x, y);
+      if (!isNaN(a) && !isNaN(b) && test(a, b)) ctx.fillRect(px, py, S, S);
+    }
+  ctx.restore();
+  if (opNorm !== "!=") {
+    const other = q.l === "y" || q.l === "x" ? q.r : q.r === "y" || q.r === "x" ? q.l : null;
+    const axis = q.l === "y" || q.l === "x" ? q.l : q.r === "y" || q.r === "x" ? q.r : null;
+    if (axis && other) {
+      ctx.save();
+      ctx.setLineDash(opNorm.length === 1 ? [9, 7] : []);
+      plotExpression({ plot: axis + "=" + other, color: expr.color }, w, h);
+      ctx.restore();
+    }
+  }
+  return true;
+}
+
+async function shareGraph() {
+  const list = expressions.filter((e) => e.plot);
+  if (!list.length) {
+    gMsg("សូមគូសក្រាហ្វិកជាមុនសិន");
+    return;
+  }
+  const k = canvas.width / canvas.clientWidth || 1, bar = Math.round(54 * k);
+  const out = document.createElement("canvas");
+  out.width = canvas.width;
+  out.height = canvas.height + bar;
+  const c = out.getContext("2d");
+  c.fillStyle = "#ffffff";
+  c.fillRect(0, 0, out.width, out.height);
+  c.drawImage(canvas, 0, 0);
+  c.fillStyle = "#0f172a";
+  c.fillRect(0, canvas.height, out.width, bar);
+  c.textBaseline = "middle";
+  const mid = canvas.height + bar / 2;
+  c.font = "700 " + 15 * k + 'px "JetBrains Mono","Kantumruy Pro",monospace';
+  c.textAlign = "right";
+  c.fillStyle = "#f59e0b";
+  c.fillText("MY BOOKSHELF", out.width - 16 * k, mid);
+  const limit = out.width - c.measureText("MY BOOKSHELF").width - 40 * k;
+  c.textAlign = "left";
+  let x = 16 * k;
+  for (const e of list) {
+    const t = e.plot.length > 28 ? e.plot.slice(0, 27) + "…" : e.plot;
+    const wd = c.measureText(t).width + 34 * k;
+    if (x + wd > limit) break;
+    c.fillStyle = e.color;
+    c.beginPath();
+    c.arc(x + 6 * k, mid, 6 * k, 0, 7);
+    c.fill();
+    c.fillStyle = "#e2e8f0";
+    c.fillText(t, x + 18 * k, mid);
+    x += wd;
+  }
+  const blob = await new Promise((r) => out.toBlob(r, "image/png"));
+  const file = new File([blob], "graph.png", { type: "image/png" });
+  try {
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({ files: [file], title: "ក្រាហ្វិក", text: "ក្រាហ្វិកពី MY BOOKSHELF" });
+      return;
+    }
+  } catch (err) {
+    if (err && err.name === "AbortError") return;
+  }
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "graph.png";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  gMsg("បានរក្សាទុករូបភាព graph.png", true);
+}
+
+function eqKey() {
+  const i = focusedInput;
+  if (i && document.body.contains(i) && /^\s*[xy]\s*$/i.test(i.value)) {
+    insertText("=");
+    return;
+  }
+  plotFocused();
+}
+
+/* ---------------- Header menu (new) ---------------- */
+function toggleNav() {
+  document.body.classList.toggle("nav-open");
+}
+document.querySelectorAll(".main-nav a").forEach((a) =>
+  a.addEventListener("click", () => document.body.classList.remove("nav-open")),
+);
+window.addEventListener("resize", () => {
+  if (window.innerWidth > 860) document.body.classList.remove("nav-open");
+});
+</script>
+</body>
+</html>

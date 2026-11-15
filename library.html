@@ -1,0 +1,1880 @@
+<!doctype html>
+<html lang="km">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>បណ្ណាល័យ - MY BOOKSHELF</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="/image/LOGO_OF_MY_BOOKSHELF_UNBACKGROUND.png"
+    />
+
+    <!-- Google Fonts: Kantumruy Pro (Khmer) + Inter (English) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <style>
+      :root {
+        --primary: #16a34a;
+        --primary-hover: #15803d;
+        --primary-light: #dcfce7;
+        --accent: #eab308;
+        --accent-hover: #ca8a04;
+        --dark-bg: #0f172a;
+        --card-bg: #ffffff;
+        --text-main: #3d4c64;
+        --text-muted: #64748b;
+        --border-color: #83d37f;
+        --radius-lg: 16px;
+        --radius-md: 10px;
+        --radius-full: 9999px;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 20px -2px rgba(0, 0, 0, 0.08);
+        --shadow-lg: 0 12px 30px -4px rgba(0, 0, 0, 0.12);
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        --font-family-base:
+          "Kantumruy Pro", "Inter", -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Roboto, sans-serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          "Kantumruy Pro",
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        background: #f1fff0;
+        color: var(--text-main);
+        overflow-x: hidden;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* ========== HEADER ========== */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        background: linear-gradient(135deg, #1349b7 0%, #2095b6 100%);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 14px 48px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: var(--transition);
+        height: 70px;
+        border-radius: 2px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+      }
+
+      .logo-text {
+        font-family: "Inter", var(--font-family-base);
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        line-height: 0.9;
+      }
+
+      .logo-text .live {
+        color: #d16550;
+      }
+      .logo-text .teaching {
+        color: #15be1b;
+      }
+
+      .logo-khmer {
+        font-size: 11px;
+        color: #94a3b8;
+        font-weight: 400;
+        letter-spacing: 0.5px;
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 32px;
+      }
+
+      nav ul li a {
+        color: #f1f5f9;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 500;
+        position: relative;
+        padding: 4px 0;
+        transition: var(--transition);
+      }
+
+      nav ul li a::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0%;
+        height: 2px;
+        background: #4ade80;
+        border-radius: 2px;
+        transition: var(--transition);
+      }
+
+      nav ul li a:hover,
+      nav ul li a.active {
+        color: #4ade80;
+      }
+
+      nav ul li a:hover::after,
+      nav ul li a.active::after {
+        width: 100%;
+      }
+
+      .btn-chatbot {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .icon-links {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .btn-chatbot a {
+        color: #cbd5e1;
+        font-size: 18px;
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius-md);
+        background: rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-decoration: none;
+      }
+
+      .btn-chatbot a:hover {
+        color: #ffffff;
+        background: #16a34a;
+        font-size: 18px;
+        width: 42px;
+        height: 42px;
+        box-shadow: 0 4px 12px rgba(83, 213, 185, 0.25);
+      }
+
+      .menu-toggle {
+        display: none;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius-md);
+        font-size: 18px;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .menu-toggle:hover {
+        background: rgba(255, 255, 255, 0.2);
+        font-size: 23px;
+      }
+
+      .menu-toggle:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px #4ade80;
+      }
+
+      /* ========== BANNER & SEARCH ========== */
+      .page-banner {
+        margin-top: 70px;
+        padding: 50px 24px 35px;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        color: #ffffff;
+        text-align: center;
+      }
+
+      .page-banner h1 {
+        font-size: 36px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: #4ade80;
+      }
+
+      .page-banner p {
+        font-size: 15px;
+        color: #94a3b8;
+        margin-bottom: 24px;
+      }
+
+      .search-box {
+        max-width: 500px;
+        margin: 0 auto;
+        display: flex;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 6px;
+        border-radius: var(--radius-full);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .search-box input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        padding: 10px 18px;
+        color: #fff;
+        outline: none;
+        font-size: 14px;
+        font-family: inherit;
+      }
+
+      .search-box input::placeholder {
+        color: #94a3b8;
+      }
+
+      .search-box button {
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: var(--radius-full);
+        cursor: pointer;
+        font-family: inherit;
+        transition: var(--transition);
+      }
+
+      .search-box button:hover {
+        background: var(--primary-hover);
+      }
+
+      /* ========== CATEGORY FILTER ========== */
+      .filter-container {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 36px;
+      }
+
+      .filter-btn {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        padding: 8px 18px;
+        border-radius: var(--radius-full);
+        color: var(--text-main);
+        font-size: 14px;
+        font-weight: 500;
+        font-family: inherit;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--primary);
+        color: #ffffff;
+        border-color: var(--primary);
+      }
+
+      /* ========== LIBRARY SECTION ========== */
+      .section {
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 40px 16px 60px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .shelf-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+        gap: 28px;
+        margin-bottom: 50px;
+        align-items: stretch;
+      }
+
+      /* Every card is a column; buttons are pushed to the bottom so all cards match */
+      .book {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        background: var(--card-bg);
+        border: 1px solid #d9f2d6;
+        border-radius: 20px;
+        padding: 14px;
+        box-shadow: 0 4px 18px -4px rgba(15, 23, 42, 0.1);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease,
+          border-color 0.3s ease;
+      }
+
+      .book:hover {
+        transform: translateY(-6px);
+        border-color: var(--border-color);
+        box-shadow: 0 18px 32px -10px rgba(22, 163, 74, 0.28);
+      }
+
+      .book-cover {
+        --c1: #0e7490;
+        --c2: #22d3ee;
+        position: relative;
+        aspect-ratio: 4 / 4.6;
+        border-radius: 14px;
+        background:
+          radial-gradient(
+            circle at 80% 15%,
+            rgba(255, 255, 255, 0.28),
+            transparent 45%
+          ),
+          linear-gradient(135deg, var(--c1) 0%, var(--c2) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255, 255, 255, 0.95);
+        box-shadow: inset -6px 0 14px rgba(0, 0, 0, 0.16);
+        cursor: pointer;
+        overflow: hidden;
+      }
+
+      /* book spine */
+      .book-cover::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 10px;
+        background: rgba(0, 0, 0, 0.18);
+        z-index: 2;
+      }
+
+      /* soft decorative circle */
+      .book-cover::after {
+        content: "";
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        left: -50px;
+        bottom: -60px;
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      .book-cover .cover-icon {
+        font-size: 56px;
+        z-index: 1;
+        filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.25));
+        transition: transform 0.3s ease;
+      }
+
+      .book:hover .cover-icon {
+        transform: scale(1.12) rotate(-4deg);
+      }
+
+      .book-cover .format-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 3;
+        background: #f59e0b;
+        color: #000;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 999px;
+        font-family: var(--font-family-base);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      }
+
+      .book-info {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        padding-top: 14px;
+      }
+
+      .book-chip {
+        align-self: flex-start;
+        background: var(--primary-light);
+        color: var(--primary-hover);
+        font-family: var(--font-family-base);
+        font-size: 11px;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 999px;
+        margin-bottom: 8px;
+      }
+
+      /* Title: always reserves 2 lines so every card lines up */
+      .book-info h3 {
+        font-family: var(--font-family-base);
+        font-size: 16px;
+        font-weight: 700;
+        color: #1e293b;
+        line-height: 1.5;
+        min-height: 3em;
+        margin-bottom: 16px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .book-links {
+        display: flex;
+        gap: 10px;
+        margin-top: auto;
+        padding-top: 14px;
+        border-top: 1px dashed var(--border-color);
+      }
+
+      .book-links a {
+        flex: 1;
+        text-align: center;
+        padding: 9px 8px;
+        border-radius: 999px;
+        text-decoration: none;
+        font-family: var(--font-family-base);
+        font-size: 13px;
+        font-weight: 600;
+        transition: all 0.25s;
+      }
+
+      .book-links .btn-read {
+        background: linear-gradient(135deg, #1349b7 0%, #2095b6 100%);
+        color: #ffffff;
+        box-shadow: 0 4px 10px -2px rgba(19, 73, 183, 0.4);
+      }
+      .book-links .btn-read:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px -4px rgba(19, 73, 183, 0.5);
+      }
+
+      .book-links .btn-download {
+        background: #f0fdf4;
+        color: var(--primary-hover);
+        border: 1px solid #bbf7d0;
+      }
+      .book-links .btn-download:hover {
+        background: var(--primary);
+        color: #ffffff;
+        border-color: var(--primary);
+      }
+
+      .bookside {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      /* no image yet -> show the coloured cover + icon instead */
+      .bookside[src=""],
+      .bookside:not([src]) {
+        display: none;
+      }
+
+      .shelf-empty {
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 15px;
+        padding: 40px 0;
+      }
+      .load-more-wrap {
+        text-align: center;
+        margin-bottom: 50px;
+      }
+      .load-more {
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 600;
+        color: #ffffff;
+        padding: 11px 30px;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        background: linear-gradient(135deg, #1349b7 0%, #2095b6 100%);
+        box-shadow: 0 4px 12px -2px rgba(19, 73, 183, 0.4);
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s;
+      }
+      .load-more:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 18px -4px rgba(19, 73, 183, 0.5);
+      }
+
+      /* ========== FOOTER ========== */
+      .footer {
+        background: var(--dark-bg);
+        color: #ced4ed;
+        padding: 40px 24px 0;
+        margin-top: auto;
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+          opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+          transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .footer.in-view {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 0.5fr 0.8fr 1fr;
+        gap: 48px;
+        padding-bottom: 30px;
+      }
+
+      .footer-col {
+        opacity: 0;
+        transform: translateY(18px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+
+      .footer.in-view .footer-col {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .footer.in-view .footer-col:nth-child(1) {
+        transition-delay: 0.1s;
+      }
+      .footer.in-view .footer-col:nth-child(2) {
+        transition-delay: 0.2s;
+      }
+      .footer.in-view .footer-col:nth-child(3) {
+        transition-delay: 0.3s;
+      }
+
+      .footer-logo {
+        font-family: "Inter", var(--font-family-base);
+        font-size: 26px;
+        font-weight: 800;
+        display: inline-block;
+        transition: transform 0.3s ease;
+      }
+
+      .footer-logo:hover {
+        transform: scale(1.06);
+      }
+
+      .footer-logo .live {
+        color: #d16550;
+      }
+      .footer-logo .teaching {
+        color: #15be1b;
+      }
+
+      .footer-col h3 {
+        color: #e8f9e0;
+        font-size: 16px;
+        margin-bottom: 16px;
+        font-weight: 600;
+      }
+
+      .footer-col ul {
+        list-style: none;
+      }
+      .footer-col ul li {
+        margin-bottom: 10px;
+      }
+      .footer-col li a {
+        position: relative;
+        color: #94a3b8;
+        text-decoration: none;
+        font-size: 14px;
+        transition: var(--transition);
+      }
+
+      .footer-col li a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -3px;
+        width: 0;
+        height: 1px;
+        background: #4ade80;
+        transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .footer-col li a:hover {
+        color: #4ade80;
+        padding-left: 4px;
+      }
+
+      .footer-col li a:hover::after {
+        width: 100%;
+      }
+
+      /* Footer social icons */
+      .footer-social {
+        display: flex;
+        gap: 20px;
+        margin-top: 18px;
+      }
+      .footer-social a {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid #505954;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.08);
+        color: #cbd5e1;
+        font-size: 18px;
+        text-decoration: none;
+        transition:
+          transform 0.3s ease,
+          background 0.3s ease,
+          color 0.3s ease;
+      }
+      .footer-social a:hover {
+        transform: translateY(-3px);
+        color: #fff;
+      }
+      .footer-social a.facebook:hover {
+        background: #1877f2;
+      }
+      .footer-social a.tiktok:hover {
+        background: #000;
+        box-shadow:
+          -2px -2px 0 #25f4ee,
+          2px 2px 0 #fe2c55;
+      }
+      .footer-social a.telegram:hover {
+        background: #4992da;
+      }
+
+      .footer-bottom {
+        background: #020617;
+        text-align: center;
+        padding: 16px 24px;
+        font-size: 13px;
+        color: #64748b;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .footer-bottom a {
+        position: relative;
+        color: #94a3b8;
+        text-decoration: none;
+        margin: 0 8px;
+      }
+
+      .footer-bottom a::after {
+        content: "";
+        position: absolute;
+        left: 8px;
+        right: 8px;
+        bottom: -3px;
+        width: 0;
+        height: 1px;
+        background: #4ade80;
+        transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .footer-bottom a:hover {
+        color: #e2f7f8;
+      }
+
+      .footer-bottom a:hover::after {
+        width: calc(100% - 16px);
+      }
+
+      /* Responsive Navigation */
+      @media (max-width: 900px) {
+        header {
+          padding: 12px 20px;
+        }
+
+        nav ul {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background: rgba(15, 23, 42, 0.98);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          flex-direction: column;
+          padding: 24px;
+          gap: 18px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          box-shadow: var(--shadow-lg);
+        }
+
+        nav ul.active {
+          display: flex;
+        }
+
+        .menu-toggle {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .icon-links {
+          display: none;
+          position: absolute;
+          top: 100%;
+          right: 20px;
+          background: rgba(15, 23, 42, 0.98);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 16px;
+          gap: 14px;
+          border-radius: var(--radius-md);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          box-shadow: var(--shadow-lg);
+        }
+
+        .icon-links.active {
+          display: flex;
+        }
+
+        .icon-links a {
+          font-size: 18px;
+        }
+
+        .footer-container {
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+      }
+
+      .photo {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: -3px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ==================== HEADER ==================== -->
+    <header>
+      <div class="logo">
+        <img
+          class="photo"
+          src="/image/LOGO_OF_MY_BOOKSHELF.png"
+          alt="MY BOOKSHELF"
+        />
+        <div>
+          <div class="logo-text">
+            <span class="live">MY</span> <span class="teaching">BOOKSHELF</span>
+          </div>
+          <div class="logo-khmer">free book</div>
+        </div>
+      </div>
+
+      <nav>
+        <ul id="navMenu">
+          <li><a href="/index.html">ទំព័រដើម</a></li>
+          <li>
+            <a href="/library.html" class="active">បណ្ណាល័យ</a>
+          </li>
+          <li><a href="/newspage.html">ព័ត៌មានថ្មី</a></li>
+          <li>
+            <a href="/contactpage.html">ទំនាក់ទំនង</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="btn-chatbot">
+        <div class="icon-links" id="iconLinks">
+          <a target="_blank" title="គូសក្រាប" href="/graphing.html">📉</a>
+          <a target="_blank" title="ម៉ាសុីនងាយ" href="/converter.html">🧮</a>
+          <a target="_blank" title="ជំនួយការ" href="/AI CHAT/index.html"
+            ><i class="as"></i>🤖</a
+          >
+        </div>
+        <button class="menu-toggle" id="iconToggle" title="ឧបករណ៍">
+          <i class="fas fa-toolbox"></i>
+        </button>
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- ==================== BANNER ==================== -->
+    <section class="page-banner">
+      <h1>បណ្ណាល័យឌីជីថល (Digital Library)</h1>
+      <p>
+        ស្វែងរក និងទាញយកសៀវភៅសិក្សា សៀវភៅអានកម្សាន្ត
+        និងឯកសារស្រាវជ្រាវដោយឥតគិតថ្លៃ
+      </p>
+
+      <div class="search-box">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="ស្វែងរកឈ្មោះសៀវភៅផ្សេងៗ....."
+        />
+        <button id="searchBtn"><i class="fas fa-search"></i> ស្វែងរក</button>
+      </div>
+    </section>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main class="section">
+      <!-- Filter Buttons -->
+      <div class="filter-container">
+        <button class="filter-btn active" data-category="all">
+          សៀវភៅទាំងអស់
+        </button>
+        <button class="filter-btn" data-category="story">
+          អក្សរសិល្ប៍ / និទានកុមារ
+        </button>
+        <button class="filter-btn" data-category="culture">វប្បធ៍មទូទៅ</button>
+        <button class="filter-btn" data-category="computer">កំុព្យូទ័រ</button>
+        <button class="filter-btn" data-category="knowledge">ចំណេះដឹង</button>
+        <button class="filter-btn" data-category="research">ផ្សេងៗ...</button>
+      </div>
+    </main>
+    <main class="container" id="library">
+      <div class="shelf-grid" id="shelfGrid"></div>
+      <p class="shelf-empty" id="shelfEmpty" hidden>
+        រកមិនឃើញសៀវភៅដែលអ្នកស្វែងរកទេ។
+      </p>
+      <div class="load-more-wrap">
+        <button class="load-more" id="loadMore" hidden>បង្ហាញបន្ថែម</button>
+      </div>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-col">
+          <div class="logo">
+            <img
+              class="photo"
+              src="/image/LOGO_OF_MY_BOOKSHELF.png"
+              alt="MY BOOKSHELF"
+            />
+            <div>
+              <div class="logo-text">
+                <span class="live">MY</span>
+                <span class="teaching">BOOKSHELF</span>
+              </div>
+            </div>
+          </div>
+          <p
+            style="
+              font-size: 13px;
+              color: #94a3b8;
+              margin-top: 8px;
+              line-height: 1.6;
+            "
+          >
+            បណ្ណាល័យឌីជីថលឥតគិតថ្លៃ សម្រាប់សិស្សានុសិស្សស្វ័យសិក្សា រួមមានសៀវភៅ
+            និងឯកសារសិក្សាជាច្រើនប្រភេទ។
+          </p>
+          <div class="footer-social">
+            <a
+              href="https://www.facebook.com/@MYBOOKSHELFKH"
+              class="facebook"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              title="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a
+              href="https://www.tiktok.com/@mybookshelfkh"
+              class="tiktok"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="TikTok"
+              title="TikTok"
+              ><i class="fab fa-tiktok"></i
+            ></a>
+            <a
+              href="https://t.me/MYBOOKSHELFkh"
+              class="telegram"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Telegram"
+              title="Telegram"
+              ><i class="fab fa-telegram"></i
+            ></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>តំណភ្ជាប់រហ័ស</h3>
+          <ul>
+            <li>
+              <a href="/index.html">ទំព័រដើម</a>
+            </li>
+            <li>
+              <a href="/library.html">បណ្ណាល័យ</a>
+            </li>
+            <li>
+              <a href="/newspage.html">ព័ត៏មានថ្មីៗ</a>
+            </li>
+            <li>
+              <a href="/contactpage.html">ទំនាក់ទំនង​</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>ទំនាក់ទំនង</h3>
+          <ul>
+            <li>
+              <a
+                href="https://maps.app.goo.gl/3mTezJYC5UhiJBpc8"
+                target="_blank"
+                ><i class="fas fa-map-marker-alt"></i> រាជធានីភ្នំពេញ,
+                ព្រះរាជាណាចក្រកម្ពុជា</a
+              >
+            </li>
+            <li>
+              <a href="tel:+85510344679" target="_blank"
+                ><i class="fas fa-phone"></i> +855 10 344 679</a
+              >
+            </li>
+            <li>
+              <a href="mailto:mybookshelf.kh01@gmail.com" target="_blank"
+                ><i class="fas fa-envelope"></i> mybookshelf.kh01@gmail.com</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>អំពីសេវាកម្ម</h3>
+          <p style="font-size: 13px; color: #94a3b8; line-height: 1.6">
+            ផ្តល់ជូនសេវាកម្មអាន ទាញយកឯកសារ និងប្រើប្រាស់ឧបករណ៍ជំនួយការសិក្សា
+            (AI, Graphing, Converter) ដោយសេរី។ ប្រសិនបើមានខ្លឹមសារណាមិនសមរម្យ
+            សូមទាក់ទងមកយើងខ្ញុំដើម្បីកែសម្រួល ឬលុបចេញ។
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          រាល់ឯកសារទាំងអស់នៅលើគេហទំព័រនេះ
+          គឺសម្រាប់តែការសិក្សាផ្ទាល់ខ្លួនប៉ុណ្ណោះ
+          ហើយសិទ្ធិគ្រប់យ៉ាងជារបស់ម្ចាស់ដើម។
+        </p>
+        <p>My Bookshelf © 2026 - All Rights Reserved</p>
+        <div style="margin-top: 6px">
+          <a href="/privacypolicy.html">Privacy Policy</a>
+          |
+          <a href="/termsofservice.html">Terms of Service</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- =====================================================================
+         ✏️  បញ្ចូលសៀវភៅនៅទីនេះ   (សៀវភៅ ១ ក្បាល = ១ បន្ទាត់)
+         ===================================================================== -->
+    <script>
+      /*
+        របៀបបន្ថែមសៀវភៅថ្មី៖ copy បន្ទាត់ addBook មួយ រួច paste ខាងក្រោមបន្ទាត់ចុងក្រោយ
+        ហើយប្តូរតម្លៃទាំង ៤ នៅក្នុងសញ្ញា " " ៖
+
+          addBook( "ឈ្មោះសៀវភៅ" , "ស្លាកតូច" , "ប្រភេទ" , "ទីតាំងឯកសារ PDF" );
+
+        ១) ឈ្មោះសៀវភៅ  : ចំណងជើងដែលបង្ហាញលើកាត
+        ២) ស្លាកតូច     : ពាក្យខ្លីៗលើចំណងជើង ឧ. "ភាសាអង់គ្លេស"  (មិនចង់បាន ដាក់ "" )
+        ៣) ប្រភេទ       : ជ្រើសរើសមួយ ហើយសរសេរដូចគេ (អក្សរអង់គ្លេសតូច)
+                           culture   = វប្បធម៌ទូទៅ
+                           novel     = រឿងប្រលោមលោក
+                           knowledge = ចំណេះដឹង
+                           thinking  = ទស្សនវិជ្ជា
+                           story     = អក្សរសិល្ប៍ / និទានកុមារ
+                           research  = ស្រាវជ្រាវផ្សេងៗ
+        ៤) ឯកសារ PDF   : ចាប់ផ្តើមដោយ /LibraryBook/ ហើយតាមដោយឈ្មោះឯកសារ
+
+        ៥) រូបគម្រប (ជម្រើស)៖ បើចង់បានរូប ដាក់ទីតាំងរូបជាតម្លៃទី ៥ ឧ.
+           addBook("ឈ្មោះសៀវភៅ", "ស្លាក", "knowledge", "/LibraryBook/a.pdf", "/image/covers/a.jpg");
+           មិនចង់បានរូប ទុកទទេ គឺបានគម្របពណ៌បៃតងខៀវដដែល។
+
+        ចំណាំ៖ ត្រូវមានសញ្ញា " " និង ( ) និង ; ឱ្យគ្រប់ ហើយអក្សរក្នុង " " មិនត្រូវមានសញ្ញា " ផ្សេងទៀតទេ។
+      /* ⛔ មិនចាំបាច់កែអ្វីខាងក្រោមបន្ទាត់នេះទេ */
+
+      addBook(
+        "រឿង បឹងយក្សឡោម",
+        "PDF",
+        "story",
+        "/LibraryBook/story-yeak-lorm-lake.pdf",
+        "/image/LibraryBookImageList/A1.png",
+      );
+      addBook(
+        "The Wedding People",
+        "PDF",
+        "knowledge",
+        "/LibraryBook/book_3.pdf",
+        "/image/LibraryBookImageList/D3.png",
+      );
+      addBook(
+        "I Who Have Never Known Men",
+        "PDF",
+        "knowledge",
+        "/LibraryBook/book_2.pdf",
+        "/image/LibraryBookImageList/D2.png",
+      );
+      addBook(
+        "A Little Life",
+        "PDF",
+        "knowledge",
+        "/LibraryBook/book_1.pdf",
+        "/image/LibraryBookImageList/D1.png",
+      );
+      addBook(
+        "Math Olympiad China 2007-2008",
+        "PDF",
+        "research",
+        "/LibraryBook/math_olympiad_china_2007_2008.pdf",
+        "/image/LibraryBookImageList/F8.png",
+      );
+      addBook(
+        "Idioms and Phrases",
+        "PDF",
+        "research",
+        "/LibraryBook/idioms_and_phrases_christopher.pdf",
+        "/image/LibraryBookImageList/F9.png",
+      );
+      addBook(
+        "English Vocabulary in Use Pre-Intermediate & Intermediate",
+        "PDF",
+        "research",
+        "/LibraryBook/english_vocabulary_in_use_pre_intermediate_intermediate.pdf",
+        "/image/LibraryBookImageList/F10.png",
+      );
+      addBook(
+        "English Vocabulary in Use Advanced",
+        "PDF",
+        "research",
+        "/LibraryBook/english_vocabulary_in_use_advanced.pdf",
+        "/image/LibraryBookImageList/F11.png",
+      );
+      addBook(
+        "រឿង បុរសជីកក្តាម",
+        "PDF",
+        "story",
+        "/LibraryBook/story-the-crabber.pdf",
+        "/image/LibraryBookImageList/A2.png",
+      );
+      addBook(
+        "រឿង សុបិនកុមារ",
+        "PDF",
+        "story",
+        "/LibraryBook/story-soben-komar-part1.pdf",
+        "/image/LibraryBookImageList/A3.png",
+      );
+      addBook(
+        "រឿង ស័ង្ខសិល្ប៍ជ័យ",
+        "PDF",
+        "story",
+        "/LibraryBook/story-saing-silachey-part1.pdf",
+        "/image/LibraryBookImageList/A4.png",
+      );
+      addBook(
+        "រឿង ដើមកំណើតរន្ទះ",
+        "PDF",
+        "story",
+        "/LibraryBook/story-origin-of-thunder.pdf",
+        "/image/LibraryBookImageList/A52.png",
+      );
+      addBook(
+        "រឿង បក្សីលៀងអារក្ស",
+        "PDF",
+        "story",
+        "/LibraryBook/story-birds-feasting-demon.pdf",
+        "/image/LibraryBookImageList/A5.png",
+      );
+      addBook(
+        "រឿង ខ្មោចនឹកប្រពន្ធកូន",
+        "PDF",
+        "story",
+        "/LibraryBook/story-47-ghost-missing-wife-and-children.pdf",
+        "/image/LibraryBookImageList/A6.png",
+      );
+      addBook(
+        "រឿង ក្រៃថោង ក្រពើឆារ៉ាវ៉ាន់",
+        "PDF",
+        "story",
+        "/LibraryBook/story-46-kraithaong-and-crocodile-chharavann.pdf",
+        "/image/LibraryBookImageList/A7.png",
+      );
+      addBook(
+        "មូលដ្ឋានគ្រឹះកំុព្យូទ័រ",
+        "PDF",
+        "computer",
+        "/LibraryBook/fouder1.pdf",
+      );
+      addBook(
+        "howtouseZOOM",
+        "PDF",
+        "computer",
+        "/LibraryBook/howtouseZOOM.pdf",
+      );
+      addBook("រឿងអក្សសិល្ប៍ខ្មែរ", "PDF", "story", "/LibraryBook/fouder2.pdf");
+      addBook(
+        "រឿង កូនចាំផ្ទះម្នាក់ឯង",
+        "PDF",
+        "story",
+        "/LibraryBook/story-45-son-stays-at-home-alone.pdf",
+        "/image/LibraryBookImageList/A8.png",
+      );
+      addBook(
+        "រឿង កូនខ្លាឃ្មុំទីនទីន និង កូនស្វាមីមី",
+        "PDF",
+        "story",
+        "/LibraryBook/story-44-baby-bear-tin-tin-and-baby-monkey-mei-mei.pdf",
+        "/image/LibraryBookImageList/A9.png",
+      );
+      addBook(
+        "រឿង កូនកង្កែបស្តាប់ដំបូន្មាន",
+        "PDF",
+        "story",
+        "/LibraryBook/story-43-obedient-baby-frog.pdf",
+        "/image/LibraryBookImageList/A10.png",
+      );
+      addBook(
+        "រឿង កងការពារមិនទារកំរៃ",
+        "PDF",
+        "story",
+        "/LibraryBook/story-42-the-unpaid-guards.pdf",
+        "/image/LibraryBookImageList/A11.png",
+      );
+      addBook(
+        "រឿង ភ្នំសន្ធុក",
+        "PDF",
+        "story",
+        "/LibraryBook/story-41-phnom-santouk.pdf",
+        "/image/LibraryBookImageList/A12.png",
+      );
+      addBook(
+        "រឿង ប្រាសាទអង្គរ",
+        "PDF",
+        "story",
+        "/LibraryBook/story-40-angkor-wat-temples.pdf",
+        "/image/LibraryBookImageList/A13.png",
+      );
+      addBook(
+        "រឿង ប្រវត្តិភ្នំសំពៅ",
+        "PDF",
+        "story",
+        "/LibraryBook/story-39-history-of-phnom-sompov-hill.pdf",
+        "/image/LibraryBookImageList/A14.png",
+      );
+      addBook(
+        "រឿង បុរសអាវទិព្វ",
+        "PDF",
+        "story",
+        "/LibraryBook/story-38-man-with-magic-shirt.pdf",
+        "/image/LibraryBookImageList/A15.png",
+      );
+      addBook(
+        "រឿង នាងកូនពៅសក់ក្រអូប",
+        "PDF",
+        "story",
+        "/LibraryBook/story-37-fragrant-haired-neang-pov.pdf",
+        "/image/LibraryBookImageList/A16.png",
+      );
+      addBook(
+        "រឿង កណ្តុរ និង ដីស",
+        "PDF",
+        "story",
+        "/LibraryBook/story-01-mouse-and-chalk.pdf",
+        "/image/LibraryBookImageList/A51.png",
+      );
+      addBook(
+        "រឿង ភ្នំនាងកង្រី",
+        "PDF",
+        "story",
+        "/LibraryBook/phnom_neang_kongrey.pdf",
+        "/image/LibraryBookImageList/A53.png",
+      );
+
+      addBook(
+        "វប្បធម៌​ទូទៅ​ត្រៀមប្រឡង​ក្របខ័ណ្ឌ​នគរបាល​ជាតិ",
+        "PDF",
+        "culture",
+        "/LibraryBook/exam-general-culture-national-police.pdf",
+        "/image/LibraryBookImageList/",
+      );
+      addBook(
+        "វប្បធម៌​ទូទៅត្រៀមប្រឡងគ្រូ​ មត្តេយ្យ​ បឋម ​និង អនុវិទ្យាល័យ",
+        "PDF",
+        "culture",
+        "/LibraryBook/exam-general-culture-kindergarten-primary-teacher.pdf",
+        "/image/LibraryBookImageList/",
+      );
+      addBook(
+        "វប្បធម៌ទៅត្រៀមប្រឡងគ្រូកិច្ចសន្យា",
+        "PDF",
+        "culture",
+        "/LibraryBook/exam-general-culture-contract-teacher-2025.pdf",
+        "/image/LibraryBookImageList/B2.png",
+      );
+      addBook(
+        "វប្បធម៌ទៅត្រៀមប្រឡងគ្រូ",
+        "PDF",
+        "culture",
+        "/LibraryBook/exam-asean-qcm-500-questions.pdf",
+        "/image/LibraryBookImageList/B3.png",
+      );
+      addBook(
+        "ដើមកំណើតអង្គរ",
+        "PDF",
+        "culture",
+        "/LibraryBook/origin-of-angkor-book.pdf",
+        "/image/LibraryBookImageList/B4.png",
+      );
+      addBook(
+        "ប្បធម៌​ទូទៅ​ត្រៀមប្រឡងមន្ត្រីរាជការ",
+        "PDF",
+        "culture",
+        "/LibraryBook/exam_general_culture.pdf",
+        "/image/LibraryBookImageList/B5.png",
+      );
+
+      addBook(
+        "Science Dictionary",
+        "PDF",
+        "research",
+        "/LibraryBook/science_dictionary.pdf",
+        "/image/LibraryBookImageList/F1.png",
+      );
+      addBook(
+        "រឿង ធនញ្ជ័យកុមារ",
+        "PDF",
+        "story",
+        "/LibraryBook/story-36-thun-chey-koma.pdf",
+        "/image/LibraryBookImageList/A17.png",
+      );
+      addBook(
+        "រឿង ទឹកចិត្តកូនប្រុស",
+        "PDF",
+        "story",
+        "/LibraryBook/story-35-the-sons-heart.pdf",
+        "/image/LibraryBookImageList/A18.png",
+      );
+      addBook(
+        "រឿង ទិព្វសង្វារ",
+        "PDF",
+        "story",
+        "/LibraryBook/story-34-toeup-sangva-part1.pdf",
+        "/image/LibraryBookImageList/A19.png",
+      );
+      addBook(
+        "រឿង ទន្សាយឆោតល្ងង់",
+        "PDF",
+        "story",
+        "/LibraryBook/story-32-silly-rabbit.pdf",
+        "/image/LibraryBookImageList/A20.png",
+      );
+      addBook(
+        "រឿង ត្រចៀក មាត់ និង ដៃ",
+        "PDF",
+        "story",
+        "/LibraryBook/story-31-ear-mouth-and-hands.pdf",
+        "/image/LibraryBookImageList/A21.png",
+      );
+      addBook(
+        "រឿង តាមាល័យ យាយមាលា",
+        "PDF",
+        "story",
+        "/LibraryBook/story-30-tamialai-and-yiaymialia.pdf",
+        "/image/LibraryBookImageList/A22.png",
+      );
+      addBook(
+        "រឿង ដំរីឃោរឃៅ",
+        "PDF",
+        "story",
+        "/LibraryBook/story-29-cruel-elephant.pdf",
+        "/image/LibraryBookImageList/A23.png",
+      );
+      addBook(
+        "រឿង ដើមស្លាក ម្លូ",
+        "PDF",
+        "story",
+        "/LibraryBook/story-28-doem-sla-khlu.pdf",
+        "/image/LibraryBookImageList/A24.png",
+      );
+      addBook(
+        "រឿង ដើមកំណើតសត្វឆ្មា",
+        "PDF",
+        "story",
+        "/LibraryBook/story-27-origin-of-the-cat.pdf",
+        "/image/LibraryBookImageList/A25.png",
+      );
+      addBook(
+        "រឿង ចៅប៉ុនមេដៃ",
+        "PDF",
+        "story",
+        "/LibraryBook/story-26-chaopunmedai.pdf",
+        "/image/LibraryBookImageList/A26.png",
+      );
+      addBook(
+        "រឿង ចៅតប់ប្រមល់",
+        "PDF",
+        "story",
+        "/LibraryBook/story-25-chao-tab-promol.pdf",
+        "/image/LibraryBookImageList/A27.png",
+      );
+      addBook(
+        "រឿង ចៅចាក់ស្មុក",
+        "PDF",
+        "story",
+        "/LibraryBook/story-24-chow-chak-smok.pdf",
+        "/image/LibraryBookImageList/A28.png",
+      );
+      addBook(
+        "រឿង ចៅច្រមុះទិព្វ",
+        "PDF",
+        "story",
+        "/LibraryBook/story-23-magic-nose-boy.pdf",
+        "/image/LibraryBookImageList/A29.png",
+      );
+      addBook(
+        "រឿង ចៅគិង្គក់",
+        "PDF",
+        "story",
+        "/LibraryBook/story-22-chao-kingkuk.pdf",
+        "/image/LibraryBookImageList/A30.png",
+      );
+      addBook(
+        "រឿង ចោរចិត្តជា",
+        "PDF",
+        "story",
+        "/LibraryBook/story-21-chor-chitchea-generous-thief.pdf",
+        "/image/LibraryBookImageList/A31.png",
+      );
+      addBook(
+        "រឿង គ្រូពេទ្យទេវតា",
+        "PDF",
+        "story",
+        "/LibraryBook/story-20-godlike-doctor.pdf",
+        "/image/LibraryBookImageList/A32.png",
+      );
+      addBook(
+        "រឿង គ្រូឆោត សិស្សខិល",
+        "PDF",
+        "story",
+        "/LibraryBook/story-19-naive-master-and-mischievous-student.pdf",
+        "/image/LibraryBookImageList/A33.png",
+      );
+      addBook(
+        "រឿង ដើមឫស្សី",
+        "PDF",
+        "story",
+        "/LibraryBook/story-18-gratitude-of-bamboo.pdf",
+        "/image/LibraryBookImageList/A34.png",
+      );
+      addBook(
+        "រឿង គង់ហ៑ាន",
+        "PDF",
+        "story",
+        "/LibraryBook/story-17-kong-hean.pdf",
+        "/image/LibraryBookImageList/A35.png",
+      );
+      addBook(
+        "Grammar and Vocabulary Booster C2",
+        "PDF",
+        "research",
+        "/LibraryBook/osborne_mark_dooley_jenny_grammar_and_vocabulary_booster_c2.pdf",
+        "/image/LibraryBookImageList/F15.png",
+      );
+      addBook(
+        "English Grammar Essentials",
+        "PDF",
+        "research",
+        "/LibraryBook/melvin_jacqueline_english_grammar_esl_english_grammar_vocabu.pdf",
+        "/image/LibraryBookImageList/F16.png",
+      );
+      addBook(
+        "How to Teach Grammar by Scott Thornbury",
+        "PDF",
+        "research",
+        "/LibraryBook/How to Teach Grammar by Scott Thornbury.pdf",
+        "/image/LibraryBookImageList/F17.png",
+      );
+      addBook(
+        "រឿង ខ្មោចតាចេង",
+        "PDF",
+        "story",
+        "/LibraryBook/story-16-late-ta-cheng.pdf",
+        "/image/LibraryBookImageList/A36.png",
+      );
+      addBook(
+        "រឿង ខ្មោចដើមចេកជ្វា",
+        "PDF",
+        "story",
+        "/LibraryBook/story-15-ghost-on-large-banana-tree.pdf",
+        "/image/LibraryBookImageList/A37.png",
+      );
+      addBook(
+        "រឿង ដើមកំណើតភ្លើង",
+        "PDF",
+        "story",
+        "/LibraryBook/story-14-history-of-fire.pdf",
+        "/image/LibraryBookImageList/A38.png",
+      );
+      addBook(
+        "រឿង កំណប់ឪពុក",
+        "PDF",
+        "story",
+        "/LibraryBook/story-13-fathers-buried-treasure.pdf",
+        "/image/LibraryBookImageList/A39.png",
+      );
+      addBook(
+        "រឿង ក្អែកការកូន",
+        "PDF",
+        "story",
+        "/LibraryBook/story-12-wedding-of-crows-children.pdf",
+        "/image/LibraryBookImageList/A40.png",
+      );
+      addBook(
+        "រឿង ក្រុងឧដុង្គ",
+        "PDF",
+        "story",
+        "/LibraryBook/story-11-oudong-city.pdf",
+        "/image/LibraryBookImageList/A41.png",
+      );
+      addBook(
+        "រឿង ក្រុងសុភមិត្រ",
+        "PDF",
+        "story",
+        "/LibraryBook/story-10-krong-sopheakmit.pdf",
+        "/image/LibraryBookImageList/A42.png",
+      );
+      addBook(
+        "រឿង ក្រពើលោកនេន",
+        "PDF",
+        "story",
+        "/LibraryBook/story-09-novice-crocodile-sopor-kaley.pdf",
+        "/image/LibraryBookImageList/A43.png",
+      );
+      addBook(
+        "រឿង ក្រពើរមិលគុណ",
+        "PDF",
+        "story",
+        "/LibraryBook/story-08-ungrateful-crocodile.pdf",
+        "/image/LibraryBookImageList/A44.png",
+      );
+      addBook(
+        "រឿង ក្ងានស៑ុតមាស",
+        "PDF",
+        "story",
+        "/LibraryBook/story-07-goose-that-laid-golden-eggs.pdf",
+        "/image/LibraryBookImageList/A45.png",
+      );
+      addBook(
+        "រឿង កុមារសប្បុរស",
+        "PDF",
+        "story",
+        "/LibraryBook/story-06-generous-child.pdf",
+        "/image/LibraryBookImageList/A46.png",
+      );
+      addBook(
+        "រឿង កុមារពងទាប្រៃ",
+        "PDF",
+        "story",
+        "/LibraryBook/story-05-salted-egg-child.pdf",
+        "/image/LibraryBookImageList/A47.png",
+      );
+      addBook(
+        "រឿង កុមារចេះភាសាសត្វ",
+        "PDF",
+        "story",
+        "/LibraryBook/story-04-child-who-speaks-animal-language.pdf",
+        "/image/LibraryBookImageList/A48.png",
+      );
+      addBook(
+        "រឿង កាកី",
+        "PDF",
+        "story",
+        "/LibraryBook/story-03-kakey-part1.pdf",
+        "/image/LibraryBookImageList/A49.png",
+      );
+      addBook(
+        "រឿង កណ្តៀរនិងស្រមោច",
+        "PDF",
+        "story",
+        "/LibraryBook/story-02-termite-and-ant.pdf",
+        "/image/LibraryBookImageList/A50.png",
+      );
+      addBook(
+        "Reading Challenge 3",
+        "PDF",
+        "research",
+        "/LibraryBook/reading_challenge_3.pdf",
+        "/image/LibraryBookImageList/F2.png",
+      );
+      addBook(
+        "Reading Challenge 2",
+        "PDF",
+        "research",
+        "/LibraryBook/reading_challenge_2.pdf",
+        "/image/LibraryBookImageList/F3.png",
+      );
+      addBook(
+        "Reading Challenge 1",
+        "PDF",
+        "research",
+        "/LibraryBook/reading_challenge_1.pdf",
+        "/image/LibraryBookImageList/F4.png",
+      );
+      addBook(
+        "phrasal verbs in use advanced sample",
+        "PDF",
+        "research",
+        "/LibraryBook/phrasal_verbs_in_use_advanced_sample.pdf",
+      );
+      addBook(
+        "Maths Dictionary",
+        "PDF",
+        "research",
+        "/LibraryBook/maths_dictionary.pdf",
+        "/image/LibraryBookImageList/F5.png",
+      );
+      addBook(
+        "Math Olympiad China 2011-2014",
+        "PDF",
+        "research",
+        "/LibraryBook/math_olympiad_china_2011_2014.pdf",
+        "/image/LibraryBookImageList/F6.png",
+      );
+      addBook(
+        "Math Olympiad China 2009-2010",
+        "PDF",
+        "research",
+        "/LibraryBook/math_olympiad_china_2009_2010.pdf",
+        "/image/LibraryBookImageList/F7.png",
+      );
+
+      addBook(
+        "English Grammar in Use 5th Edition",
+        "PDF",
+        "research",
+        "/LibraryBook/english_grammar_in_use_5th_edition.pdf",
+        "/image/LibraryBookImageList/F12.png",
+      );
+      addBook(
+        "English for Everyone Level 4 Advanced",
+        "PDF",
+        "research",
+        "/LibraryBook/english_for_everyone_level_4_advanced.pdf",
+        "/image/LibraryBookImageList/F13.png",
+      );
+      addBook(
+        "Dictionary of Idioms and Their Origins",
+        "PDF",
+        "research",
+        "/LibraryBook/dictionary_of_idioms_and_their_origins.pdf",
+        "/image/LibraryBookImageList/F14.png",
+      );
+
+      addBook(
+        "English Grammar Practice Tests",
+        "PDF",
+        "research",
+        "/LibraryBook/English Grammar Practice Tests.pdf",
+        "/image/LibraryBookImageList/F18.png",
+      );
+      addBook(
+        "Assessment of Vocabulary",
+        "PDF",
+        "research",
+        "/LibraryBook/assessment_of_vocabulary.pdf",
+        "/image/LibraryBookImageList/F19.png",
+      );
+
+      addBook(
+        "Input/output Device",
+        "PDF",
+        "computer",
+        "/LibraryBook/computer_1.pdf",
+      );
+
+      function addBook(title, label, category, file, cover) {
+        window.BOOKS = window.BOOKS || [];
+        window.BOOKS.push({
+          title: title,
+          chip: label,
+          category: category,
+          file: file,
+          cover: cover,
+        });
+      }
+    </script>
+
+    <script>
+      // Footer scroll-reveal animation
+      const footerEl = document.querySelector(".footer");
+      if (footerEl) {
+        const footerObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                footerEl.classList.add("in-view");
+                footerObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15 },
+        );
+        footerObserver.observe(footerEl);
+      }
+
+      const menuToggle = document.getElementById("menuToggle");
+      const navMenu = document.getElementById("navMenu");
+
+      menuToggle.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+        const icon = menuToggle.querySelector("i");
+        icon.classList.toggle("fa-bars");
+        icon.classList.toggle("fa-xmark");
+      });
+
+      const iconToggle = document.getElementById("iconToggle");
+      const iconLinks = document.getElementById("iconLinks");
+
+      iconToggle.addEventListener("click", () => {
+        iconLinks.classList.toggle("active");
+        const icon = iconToggle.querySelector("i");
+        icon.classList.toggle("fa-toolbox");
+        icon.classList.toggle("fa-xmark");
+      });
+
+      // ==================== SEARCH, FILTER & "SHOW MORE" ====================
+      const PAGE_SIZE = 24; // how many books to show at a time
+      const shelfGrid = document.getElementById("shelfGrid");
+      const shelfEmpty = document.getElementById("shelfEmpty");
+      const loadMoreBtn = document.getElementById("loadMore");
+      const searchInput = document.getElementById("searchInput");
+      const searchBtn = document.getElementById("searchBtn");
+      const filterBtns = document.querySelectorAll(".filter-btn");
+      // ---- Build the cards from the list at the top of this file.
+      const COVER_ICON =
+        '<svg class="cover-icon" viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/><path d="M9 8h7M9 12h5"/></svg>';
+
+      // On the website, "/LibraryBook/a.pdf" is used as written.
+      // If the page is opened by double-clicking the file on a computer,
+      // the leading "/" is removed so the PDF is found next to library.html.
+      function fileLink(path) {
+        path = path || "";
+        if (location.protocol === "file:") return path.replace(/^\/+/, "");
+        return path;
+      }
+
+      function makeCard(b) {
+        const card = document.createElement("div");
+        card.className = "book";
+        card.setAttribute("data-category", b.category || "");
+
+        const cover = document.createElement("div");
+        cover.className = "book-cover";
+        cover.title = b.title;
+        cover.insertAdjacentHTML("beforeend", COVER_ICON);
+        if (b.cover) {
+          const img = document.createElement("img");
+          img.className = "bookside";
+          img.src = b.cover;
+          img.alt = b.title;
+          img.loading = "lazy";
+          img.onerror = () => img.remove(); // if the picture is missing, keep the teal cover
+          cover.appendChild(img);
+        }
+
+        const info = document.createElement("div");
+        info.className = "book-info";
+        const chip = document.createElement("span");
+        chip.className = "book-chip";
+        chip.textContent = b.chip || "\u00A0"; // keeps titles lined up when there is no label
+        if (!b.chip) chip.style.visibility = "hidden";
+        const h3 = document.createElement("h3");
+        h3.textContent = b.title;
+
+        const links = document.createElement("div");
+        links.className = "book-links";
+        const read = document.createElement("a");
+        read.className = "btn-read";
+        read.href = fileLink(b.file);
+        read.textContent = "អាន";
+        const dl = document.createElement("a");
+        dl.className = "btn-download";
+        dl.href = fileLink(b.file);
+        dl.textContent = "ទាញយក";
+        links.append(read, dl);
+
+        info.append(chip, h3, links);
+        card.append(cover, info);
+        return card;
+      }
+
+      if (Array.isArray(window.BOOKS) && window.BOOKS.length) {
+        shelfGrid.replaceChildren(...window.BOOKS.map(makeCard));
+      }
+      const allCards = Array.from(shelfGrid.querySelectorAll(".book"));
+
+      let currentCategory = "all";
+      let visibleCount = PAGE_SIZE;
+
+      function render() {
+        const q = searchInput.value.toLowerCase().trim();
+        const matches = allCards.filter((card) => {
+          const text = (
+            card.querySelector("h3").textContent +
+            " " +
+            card.querySelector(".book-chip").textContent
+          ).toLowerCase();
+          const okSearch = !q || text.includes(q);
+          const okCat =
+            currentCategory === "all" ||
+            card.getAttribute("data-category") === currentCategory;
+          return okSearch && okCat;
+        });
+
+        allCards.forEach((card) => (card.style.display = "none"));
+        matches
+          .slice(0, visibleCount)
+          .forEach((card) => (card.style.display = ""));
+
+        shelfEmpty.hidden = matches.length > 0;
+        loadMoreBtn.hidden = matches.length <= visibleCount;
+      }
+
+      function resetAndRender() {
+        visibleCount = PAGE_SIZE;
+        render();
+      }
+
+      searchInput.addEventListener("input", resetAndRender);
+      searchBtn.addEventListener("click", resetAndRender);
+      loadMoreBtn.addEventListener("click", () => {
+        visibleCount += PAGE_SIZE;
+        render();
+      });
+      filterBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          filterBtns.forEach((x) => x.classList.remove("active"));
+          btn.classList.add("active");
+          currentCategory = btn.getAttribute("data-category");
+          resetAndRender();
+        });
+      });
+
+      render();
+    </script>
+
+    <script>
+      (function () {
+        function showToast(message) {
+          let toast = document.getElementById("downloadToast");
+          if (!toast) {
+            toast = document.createElement("div");
+            toast.id = "downloadToast";
+            toast.style.cssText = `
+              position: fixed;
+              bottom: 24px;
+              left: 50%;
+              transform: translateX(-50%);
+              background: #1e293b;
+              color: #fff;
+              padding: 12px 22px;
+              border-radius: 8px;
+              font-family: "Kantumruy Pro", sans-serif;
+              font-size: 14px;
+              box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+              z-index: 1000;
+              opacity: 0;
+              pointer-events: none;
+              transition: opacity 0.3s ease;
+            `;
+            document.body.appendChild(toast);
+          }
+          toast.textContent = message;
+          toast.style.opacity = "1";
+          clearTimeout(toast._hideTimer);
+          toast._hideTimer = setTimeout(() => {
+            toast.style.opacity = "0";
+          }, 2500);
+        }
+
+        const shelfGrid = document.getElementById("shelfGrid");
+        if (!shelfGrid) return;
+
+        shelfGrid.addEventListener("click", function (e) {
+          const link = e.target.closest(".btn-download");
+          if (!link) return;
+
+          e.preventDefault();
+
+          const url = (link.getAttribute("href") || "").trim();
+          const book = link.closest(".book");
+          const h3 = book ? book.querySelector("h3") : null;
+          const title = h3 ? h3.textContent.trim() : "document";
+
+          if (!url) {
+            showToast("សូមអភ័យទោស ឯកសារនេះមិនទាន់មានទេ 🙏");
+            return;
+          }
+
+          const tempLink = document.createElement("a");
+          tempLink.href = url;
+          tempLink.download = title + ".pdf";
+          tempLink.style.display = "none";
+          document.body.appendChild(tempLink);
+          tempLink.click();
+          document.body.removeChild(tempLink);
+
+          showToast('កំពុងទាញយក "' + title + '"...');
+        });
+      })();
+    </script>
+  </body>
+</html>
