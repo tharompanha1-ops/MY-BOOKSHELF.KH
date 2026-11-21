@@ -97,7 +97,6 @@
         gap: 10px;
         text-decoration: none;
       }
-
       .logo-text {
         font-family: "Inter", var(--font-family-base);
         font-size: 22px;
@@ -105,14 +104,12 @@
         letter-spacing: 0.5px;
         line-height: 0.9;
       }
-
       .logo-text .live {
         color: #d16550;
       }
       .logo-text .teaching {
         color: #15be1b;
       }
-
       .logo-khmer {
         font-size: 11px;
         color: #94a3b8;
@@ -125,7 +122,6 @@
         list-style: none;
         gap: 32px;
       }
-
       nav ul li a {
         color: #f1f5f9;
         text-decoration: none;
@@ -135,7 +131,6 @@
         padding: 4px 0;
         transition: var(--transition);
       }
-
       nav ul li a::after {
         content: "";
         position: absolute;
@@ -147,12 +142,10 @@
         border-radius: 2px;
         transition: var(--transition);
       }
-
       nav ul li a:hover,
       nav ul li a.active {
         color: #4ade80;
       }
-
       nav ul li a:hover::after,
       nav ul li a.active::after {
         width: 100%;
@@ -163,13 +156,11 @@
         align-items: center;
         gap: 16px;
       }
-
       .icon-links {
         display: flex;
         align-items: center;
         gap: 16px;
       }
-
       .btn-chatbot a {
         color: #cbd5e1;
         font-size: 18px;
@@ -183,7 +174,6 @@
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         text-decoration: none;
       }
-
       .btn-chatbot a:hover {
         color: #ffffff;
         background: #16a34a;
@@ -205,12 +195,10 @@
         cursor: pointer;
         transition: var(--transition);
       }
-
       .menu-toggle:hover {
         background: rgba(255, 255, 255, 0.2);
         font-size: 23px;
       }
-
       .menu-toggle:focus {
         outline: none;
         box-shadow: 0 0 0 2px #4ade80;
@@ -224,14 +212,12 @@
         color: #ffffff;
         text-align: center;
       }
-
       .page-banner h1 {
         font-size: 36px;
         font-weight: 700;
         margin-bottom: 10px;
         color: #4ade80;
       }
-
       .page-banner p {
         font-size: 15px;
         color: #94a3b8;
@@ -248,7 +234,6 @@
         border-radius: var(--radius-full);
         border: 1px solid rgba(255, 255, 255, 0.2);
       }
-
       .search-box input {
         flex: 1;
         background: transparent;
@@ -259,11 +244,9 @@
         font-size: 14px;
         font-family: inherit;
       }
-
       .search-box input::placeholder {
         color: #94a3b8;
       }
-
       .search-box button {
         background: var(--primary);
         color: #fff;
@@ -274,7 +257,6 @@
         font-family: inherit;
         transition: var(--transition);
       }
-
       .search-box button:hover {
         background: var(--primary-hover);
       }
@@ -287,7 +269,6 @@
         flex-wrap: wrap;
         margin-bottom: 36px;
       }
-
       .filter-btn {
         background: var(--card-bg);
         border: 1px solid var(--border-color);
@@ -300,7 +281,6 @@
         cursor: pointer;
         transition: var(--transition);
       }
-
       .filter-btn:hover,
       .filter-btn.active {
         background: var(--primary);
@@ -314,7 +294,6 @@
         margin: 0 auto;
         padding: 40px 16px 60px;
       }
-
       .container {
         max-width: 1200px;
         margin: 0 auto;
@@ -344,7 +323,6 @@
           box-shadow 0.3s ease,
           border-color 0.3s ease;
       }
-
       .book:hover {
         transform: translateY(-6px);
         border-color: var(--border-color);
@@ -372,7 +350,6 @@
         cursor: pointer;
         overflow: hidden;
       }
-
       /* book spine */
       .book-cover::before {
         content: "";
@@ -384,7 +361,6 @@
         background: rgba(0, 0, 0, 0.18);
         z-index: 2;
       }
-
       /* soft decorative circle */
       .book-cover::after {
         content: "";
@@ -396,14 +372,12 @@
         bottom: -60px;
         background: rgba(255, 255, 255, 0.12);
       }
-
       .book-cover .cover-icon {
         font-size: 56px;
         z-index: 1;
         filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.25));
         transition: transform 0.3s ease;
       }
-
       .book:hover .cover-icon {
         transform: scale(1.12) rotate(-4deg);
       }
@@ -429,7 +403,6 @@
         flex: 1;
         padding-top: 14px;
       }
-
       .book-chip {
         align-self: flex-start;
         background: var(--primary-light);
@@ -453,6 +426,8 @@
         margin-bottom: 16px;
         display: -webkit-box;
         -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
         overflow: hidden;
       }
 
@@ -463,7 +438,6 @@
         padding-top: 14px;
         border-top: 1px dashed var(--border-color);
       }
-
       .book-links a {
         flex: 1;
         text-align: center;
@@ -475,7 +449,6 @@
         font-weight: 600;
         transition: all 0.25s;
       }
-
       .book-links .btn-read {
         background: linear-gradient(135deg, #1349b7 0%, #2095b6 100%);
         color: #ffffff;
@@ -485,7 +458,6 @@
         transform: translateY(-2px);
         box-shadow: 0 8px 16px -4px rgba(19, 73, 183, 0.5);
       }
-
       .book-links .btn-download {
         background: #f0fdf4;
         color: var(--primary-hover);
@@ -553,7 +525,6 @@
           opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
           transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
       }
-
       .footer.in-view {
         opacity: 1;
         transform: translateY(0);
@@ -567,7 +538,6 @@
         gap: 48px;
         padding-bottom: 30px;
       }
-
       .footer-col {
         opacity: 0;
         transform: translateY(18px);
@@ -575,12 +545,10 @@
           opacity 0.6s ease,
           transform 0.6s ease;
       }
-
       .footer.in-view .footer-col {
         opacity: 1;
         transform: translateY(0);
       }
-
       .footer.in-view .footer-col:nth-child(1) {
         transition-delay: 0.1s;
       }
@@ -598,11 +566,9 @@
         display: inline-block;
         transition: transform 0.3s ease;
       }
-
       .footer-logo:hover {
         transform: scale(1.06);
       }
-
       .footer-logo .live {
         color: #d16550;
       }
@@ -616,7 +582,6 @@
         margin-bottom: 16px;
         font-weight: 600;
       }
-
       .footer-col ul {
         list-style: none;
       }
@@ -630,7 +595,6 @@
         font-size: 14px;
         transition: var(--transition);
       }
-
       .footer-col li a::after {
         content: "";
         position: absolute;
@@ -641,12 +605,10 @@
         background: #4ade80;
         transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
-
       .footer-col li a:hover {
         color: #4ade80;
         padding-left: 4px;
       }
-
       .footer-col li a:hover::after {
         width: 100%;
       }
@@ -699,14 +661,12 @@
         color: #64748b;
         border-top: 1px solid rgba(255, 255, 255, 0.05);
       }
-
       .footer-bottom a {
         position: relative;
         color: #94a3b8;
         text-decoration: none;
         margin: 0 8px;
       }
-
       .footer-bottom a::after {
         content: "";
         position: absolute;
@@ -718,11 +678,9 @@
         background: #4ade80;
         transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
-
       .footer-bottom a:hover {
         color: #e2f7f8;
       }
-
       .footer-bottom a:hover::after {
         width: calc(100% - 16px);
       }
@@ -732,7 +690,6 @@
         header {
           padding: 12px 20px;
         }
-
         nav ul {
           display: none;
           position: absolute;
@@ -748,17 +705,14 @@
           border-bottom: 1px solid rgba(255, 255, 255, 0.1);
           box-shadow: var(--shadow-lg);
         }
-
         nav ul.active {
           display: flex;
         }
-
         .menu-toggle {
           display: flex;
           align-items: center;
           justify-content: center;
         }
-
         .icon-links {
           display: none;
           position: absolute;
@@ -775,15 +729,12 @@
           border: 1px solid rgba(255, 255, 255, 0.1);
           box-shadow: var(--shadow-lg);
         }
-
         .icon-links.active {
           display: flex;
         }
-
         .icon-links a {
           font-size: 18px;
         }
-
         .footer-container {
           grid-template-columns: 1fr;
           gap: 24px;
@@ -819,13 +770,9 @@
       <nav>
         <ul id="navMenu">
           <li><a href="/index.html">ទំព័រដើម</a></li>
-          <li>
-            <a href="/library.html" class="active">បណ្ណាល័យ</a>
-          </li>
+          <li><a href="/library.html" class="active">បណ្ណាល័យ</a></li>
           <li><a href="/newspage.html">ព័ត៌មានថ្មី</a></li>
-          <li>
-            <a href="/contactpage.html">ទំនាក់ទំនង</a>
-          </li>
+          <li><a href="/contactpage.html">ទំនាក់ទំនង</a></li>
         </ul>
       </nav>
 
@@ -955,20 +902,13 @@
         <div class="footer-col">
           <h3>តំណភ្ជាប់រហ័ស</h3>
           <ul>
-            <li>
-              <a href="/index.html">ទំព័រដើម</a>
-            </li>
-            <li>
-              <a href="/library.html">បណ្ណាល័យ</a>
-            </li>
-            <li>
-              <a href="/newspage.html">ព័ត៏មានថ្មីៗ</a>
-            </li>
-            <li>
-              <a href="/contactpage.html">ទំនាក់ទំនង</a>
-            </li>
+            <li><a href="/index.html">ទំព័រដើម</a></li>
+            <li><a href="/library.html">បណ្ណាល័យ</a></li>
+            <li><a href="/newspage.html">ព័ត៏មានថ្មីៗ</a></li>
+            <li><a href="/contactpage.html">ទំនាក់ទំនង</a></li>
           </ul>
         </div>
+
         <div class="footer-col">
           <h3>ទំនាក់ទំនង</h3>
           <ul>
@@ -1019,8 +959,53 @@
 
     <!-- =====================================================================
          ✏️  បញ្ចូលសៀវភៅនៅទីនេះ   (សៀវភៅ ១ ក្បាល = ១ បន្ទាត់)
+         addBook(ឈ្មោះ, "PDF", ប្រភេទ, តំណ Google Drive, រូបតំណាង)
          ===================================================================== -->
     <script>
+      /* ===== FIX: these two variables were missing, which stopped the whole list ===== */
+      // Google Drive folder, used only for books that have no direct link.
+      // Replace YOUR_FOLDER_ID with your own folder ID.
+      const DRIVE_FOLDER =
+        "https://drive.google.com/drive/folders/YOUR_FOLDER_ID";
+      // Optional: file name -> Drive file ID. Leave empty if you paste full links.
+      const DRIVE_IDS = {};
+
+      function addBook(title, label, category, file, cover) {
+        window.BOOKS = window.BOOKS || [];
+        file = file || "";
+        let readUrl = DRIVE_FOLDER;
+        let downloadUrl = DRIVE_FOLDER;
+
+        if (/^https?:/i.test(file)) {
+          // A full link was typed directly -> use it for reading
+          readUrl = file;
+          downloadUrl = file;
+          // Google Drive link -> build a direct download link
+          const m = file.match(/\/d\/([^/?#]+)/);
+          if (m)
+            downloadUrl =
+              "https://drive.google.com/uc?export=download&id=" + m[1];
+        } else {
+          const id = DRIVE_IDS[file.split("/").pop()];
+          if (id) {
+            readUrl =
+              "https://drive.google.com/file/d/" + id + "/view?usp=drive_link";
+            downloadUrl =
+              "https://drive.google.com/uc?export=download&id=" + id;
+          }
+        }
+
+        window.BOOKS.push({
+          title: title,
+          chip: label,
+          category: category,
+          file: readUrl,
+          download: downloadUrl,
+          cover: cover,
+        });
+      }
+
+      /* ---------- Books ---------- */
       addBook(
         "រឿង បឹងយក្សឡោម",
         "PDF",
@@ -1223,18 +1208,16 @@
       );
 
       addBook(
-        "វប្បធម៌​ទូទៅ​ត្រៀមប្រឡង​ក្របខ័ណ្ឌ​នគរបាល​ជាតិ",
+        "វប្បធម៌ទូទៅត្រៀមប្រឡងក្របខ័ណ្ឌនគរបាលជាតិ",
         "PDF",
         "culture",
         "https://drive.google.com/file/d/1Wo2SStFImCcz0WXoJBJH2ATn8PeQRgTc/view?usp=drivesdk",
-        "/image/LibraryBookImageList/",
       );
       addBook(
-        "វប្បធម៌​ទូទៅត្រៀមប្រឡងគ្រូ​ មត្តេយ្យ​ បឋម ​និង អនុវិទ្យាល័យ",
+        "វប្បធម៌ទូទៅត្រៀមប្រឡងគ្រូ មត្តេយ្យ បឋម និង អនុវិទ្យាល័យ",
         "PDF",
         "culture",
         "https://drive.google.com/file/d/1fufl8UALSXtcxxwl3sJQn1AMGcp2g7hl/view?usp=drivesdk",
-        "/image/LibraryBookImageList/",
       );
       addBook(
         "វប្បធម៌ទៅត្រៀមប្រឡងគ្រូកិច្ចសន្យា",
@@ -1258,7 +1241,7 @@
         "/image/LibraryBookImageList/B4.png",
       );
       addBook(
-        "ប្បធម៌​ទូទៅ​ត្រៀមប្រឡងមន្ត្រីរាជការ",
+        "វប្បធម៌ទូទៅត្រៀមប្រឡងមន្ត្រីរាជការ",
         "PDF",
         "culture",
         "https://drive.google.com/file/d/1CP2cx73fiBcwQu1-jECETydHvpkZ6Vgc/view?usp=drivesdk",
@@ -1623,33 +1606,6 @@
         "computer",
         "https://drive.google.com/file/d/1Ac9d0FKI3QPWWOLq2-ltcEysHcPCF2Z0/view?usp=drivesdk",
       );
-
-      function addBook(title, label, category, file, cover) {
-        window.BOOKS = window.BOOKS || [];
-        file = file || "";
-        const name = file.split("/").pop();
-        const id = DRIVE_IDS[name];
-        let readUrl = DRIVE_FOLDER;
-        let downloadUrl = DRIVE_FOLDER;
-        if (/^https?:/i.test(file)) {
-          // a full link was typed directly -> use it as it is
-          readUrl = file;
-          downloadUrl = file;
-        } else if (id) {
-          // this book has its own Google Drive link
-          readUrl =
-            "https://drive.google.com/file/d/" + id + "/view?usp=drive_link";
-          downloadUrl = "https://drive.google.com/uc?export=download&id=" + id;
-        }
-        window.BOOKS.push({
-          title: title,
-          chip: label,
-          category: category,
-          file: readUrl,
-          download: downloadUrl,
-          cover: cover,
-        });
-      }
     </script>
 
     <script>
@@ -1698,7 +1654,8 @@
       const searchInput = document.getElementById("searchInput");
       const searchBtn = document.getElementById("searchBtn");
       const filterBtns = document.querySelectorAll(".filter-btn");
-      // ---- Build the cards from the list at the top of this file.
+
+      // ---- Build the cards from the list above.
       const COVER_ICON =
         '<svg class="cover-icon" viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/><path d="M9 8h7M9 12h5"/></svg>';
 
@@ -1840,11 +1797,11 @@
           }, 2500);
         }
 
-        const shelfGrid = document.getElementById("shelfGrid");
-        if (!shelfGrid) return;
+        const grid = document.getElementById("shelfGrid");
+        if (!grid) return;
 
         // Read + Download buttons both go to Google Drive (opened in a new tab).
-        shelfGrid.addEventListener("click", function (e) {
+        grid.addEventListener("click", function (e) {
           const link = e.target.closest(".btn-download, .btn-read");
           if (!link) return;
 
