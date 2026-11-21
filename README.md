@@ -92,14 +92,6 @@ Open the local URL displayed in your terminal.
 
 This project is intended to support students and independent learners by providing organized educational materials.
 
-## 👨‍💻 Developer
-
-**RIN THAROMPANHA**
-
-Computer Science Student | Beginner Software Developer
-
-GitHub: [@tharompanha1-ops](https://github.com/tharompanha1-ops)
-
 ## 📄 License
 
 This project is currently provided for educational and personal learning purposes.
