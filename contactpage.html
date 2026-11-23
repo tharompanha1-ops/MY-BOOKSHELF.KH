@@ -871,7 +871,7 @@
       </div>
     </footer>
 
-    <script>
+<script>
       // Footer scroll-reveal animation
       const footerEl = document.querySelector(".footer");
       if (footerEl) {
@@ -909,9 +909,11 @@
         icon.classList.toggle("fa-xmark");
       });
 
+      // ==================== TELEGRAM & DIRECT EMAIL (APPS SCRIPT) ====================
       const TELEGRAM_BOT_TOKEN =
-        "8752262781:AAGGJKzix4cTB3OzoynzjrzuC5oJXl6n2gk";
+        "9075440568:AAE6zporO_bSh6dJV2CLn-ep0INsyOKTXTU";
       const TELEGRAM_CHAT_ID = "-1004391868970";
+      const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby4eOd-QkcGUTeFMMp63fTnBKkOfHlTu_n62ePrHycPH7xGjFqBbuh9xNBb6PYHTr95/exec";
 
       async function sendToTelegram(name, contact, subject, message) {
         const text =
@@ -923,7 +925,7 @@
 
         const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
 
-        return fetch(url, {
+        const response = await fetch(url, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -932,6 +934,24 @@
             parse_mode: "Markdown",
           }),
         });
+
+        if (!response.ok) throw new Error("Telegram failed");
+        return response.json();
+      }
+
+      async function sendToEmail(name, contact, subject, message) {
+        const response = await fetch(APPS_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name,
+            email: contact,
+            subject,
+            message,
+          }),
+        });
+        return response;
       }
 
       document
@@ -949,8 +969,12 @@
           btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> កំពុងផ្ញើ...';
 
           try {
-            await sendToTelegram(name, email, subject, message);
-            alert("សាររបស់អ្នកត្រូវបានផ្ញើទៅកាន់ Telegram រួចរាល់ហើយ!");
+            await Promise.all([
+              sendToTelegram(name, email, subject, message),
+              sendToEmail(name, email, subject, message),
+            ]);
+
+            alert("សាររបស់អ្នកត្រូវបានផ្ញើទៅកាន់ Telegram និង Email រួចរាល់ហើយ!");
             this.reset();
           } catch (error) {
             console.error("Error:", error);
