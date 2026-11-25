@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "module": "none",
+    "outDir": "assets/js",
+    "rootDir": "src"
+  },
+  "include": ["src/app.ts"]
+}
