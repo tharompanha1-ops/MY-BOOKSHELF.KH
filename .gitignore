@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+
+# Build / dist
+dist/
+build/
+out/
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Logs
+*.log
+
+# Local env / secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Generated archives
+*.zip

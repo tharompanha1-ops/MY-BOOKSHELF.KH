@@ -1,0 +1,19 @@
+{
+  "name": "my-bookshelf-kh",
+  "version": "1.0.0",
+  "description": "MY BOOKSHELF.KH — a premium digital learning library platform.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "tsc -p tsconfig.app.json && tsc -p tsconfig.api.json",
+    "build:app": "tsc -p tsconfig.app.json",
+    "build:api": "tsc -p tsconfig.api.json",
+    "dev": "tsc -p tsconfig.app.json --watch",
+    "test": "python3 tests/test_rebuild.py",
+    "check:links": "python3 tools/check_links.py"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.0"
+  }
+}
